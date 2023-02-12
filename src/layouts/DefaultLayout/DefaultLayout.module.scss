@@ -1,0 +1,16 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    display: flex;
+    background-color: var(--bg-color);
+    margin-top: var(--header-height);
+    min-height: 1000px;
+}
+
+.content {
+    flex: 1;
+    padding: 0 40px 0 20px;
+}

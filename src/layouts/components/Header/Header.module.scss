@@ -1,0 +1,52 @@
+.wrapper {
+    height: var(--header-height);
+    background-color: var(--header-bg-color);
+    padding: 0 var(--app-horizontal-padding);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9;
+}
+
+.inner {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    img {
+        height: 44px;
+    }
+}
+
+.user-section {
+    display: flex;
+    align-items: center;
+}
+
+.user-notify {
+    width: 36px;
+    height: 36px;
+    font-size: 1.8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+
+    &:hover {
+        cursor: pointer;
+        background-color: var(--hover-bg-color);
+    }
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    border-radius: 50%;
+    cursor: pointer;
+    margin-left: 16px;
+}
