@@ -16,7 +16,12 @@ const regionNamesInEnglish = new Intl.DisplayNames(["en"], {
 
 function SearchItem({ data, onClick }) {
     return (
-        <Link to={`/${data.id}`} className={cx("wrapper")} onClick={onClick}>
+        <Link
+            // to={`${config.routes.movie}/${data.id}`}
+            to={`/movie/${data.id}`}
+            className={cx("wrapper")}
+            onClick={onClick}
+        >
             <Image
                 className={cx("poster")}
                 src={`${tmdbApi.getOriginalImage(data.backdrop_path)}`}

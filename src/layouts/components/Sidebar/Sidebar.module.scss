@@ -6,4 +6,7 @@
 .container {
     display: flex;
     flex-direction: column;
+    position: sticky;
+    top: calc(var(--header-height) + 16px);
+    z-index: 8;
 }
