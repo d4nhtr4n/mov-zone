@@ -7,7 +7,7 @@ $gradient: linear-gradient(90deg, #6603a0 0%, #2aeefa 50%, #6603a0 100%);
     min-width: 100px;
     padding: 6px 16px;
     border-radius: 4px;
-    font-size: 1.6rem;
+    font-size: var(--text-h6);
     font-weight: 700;
     font-family: var(--font-family);
     color: var(--text-1st-color);
@@ -87,13 +87,13 @@ $gradient: linear-gradient(90deg, #6603a0 0%, #2aeefa 50%, #6603a0 100%);
 
 // Button sizes
 .small {
-    font-size: 1.4rem;
+    font-size: var(--text-h7);
     min-width: 88px;
     padding: 4px 16px;
 }
 
 .large {
-    font-size: 1.8rem;
+    font-size: var(--text-h5);
     padding: 10px 16px;
     min-width: 140px;
 }

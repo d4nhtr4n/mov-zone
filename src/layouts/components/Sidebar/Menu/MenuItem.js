@@ -8,7 +8,6 @@ const cx = classNames.bind(style);
 
 function MenuItem({ data }) {
     const match = useMatch(data.to);
-    console.log(match);
     return (
         <NavLink
             className={(nav) => cx("item-wrapper", { active: match })}
