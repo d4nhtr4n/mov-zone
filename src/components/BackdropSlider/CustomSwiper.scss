@@ -1,0 +1,63 @@
+// Overide Swiper Classes
+// Use Id to avoid duplicate class
+
+#backdrop-slider__slider {
+    position: relative;
+
+    .swiper-pagination {
+        width: 100px !important;
+        left: 100%;
+        transform: translateX(calc(-100% - 12px));
+    }
+
+    .swiper-pagination-bullet {
+        background-color: var(--white-color);
+        transition: all 0.25s ease;
+    }
+
+    .swiper-pagination-bullet-active {
+        width: 24px;
+        border-radius: 4px;
+    }
+
+    .swiper-button-prev,
+    .swiper-button-next {
+        position: absolute;
+        top: 0;
+        width: 60px;
+        height: 100%;
+    }
+
+    .swiper-button-prev {
+        left: 0;
+
+        &:hover {
+            background: linear-gradient(90deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0) 100%);
+        }
+    }
+
+    .swiper-button-next {
+        right: 0;
+
+        &:hover {
+            background: linear-gradient(-90deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0) 100%);
+        }
+    }
+}
+
+#backdrop-slider__thumbs {
+    .swiper-slide {
+        filter: saturate(25%);
+        opacity: 0.75;
+        transition: all 0.25s ease;
+
+        &:hover {
+            opacity: 1;
+        }
+    }
+
+    .swiper-slide.swiper-slide-thumb-active {
+        filter: saturate(100%);
+        opacity: 1;
+    }
+}

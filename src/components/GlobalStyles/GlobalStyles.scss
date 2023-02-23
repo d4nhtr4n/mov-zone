@@ -1,10 +1,11 @@
 @import "normalize.css";
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600;700;800;900&display=swap");
+@import "/src/styles/mixins";
 
 :root {
     // Dimens
     --app-horizontal-padding: 28px;
-    --header-height: 80px;
+    --header-height: 66px;
 
     --text-h1: 4.8rem;
     --text-h2: 3.906rem;

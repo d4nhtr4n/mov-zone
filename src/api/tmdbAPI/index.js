@@ -42,8 +42,8 @@ const tmdbApi = {
         const url = `tv/${id}/season/${season_number}`;
         return axiosClient.get(url, { params: {} });
     },
-    getGenres: () => {
-        const url = `/genre/movie/list`;
+    getGenres: (cate = category.movie) => {
+        const url = `/genre/${cate}/list`;
         return axiosClient.get(url, { params: {} });
     },
     getOriginalImage: (imgPath) =>

@@ -1,5 +1,11 @@
+import BackdropSlider from "~/components/BackdropSlider/BackdropSlider";
+
 function Home() {
-    return <h1>Home Page</h1>;
+    return (
+        <>
+            <BackdropSlider />
+        </>
+    );
 }
 
 export default Home;
