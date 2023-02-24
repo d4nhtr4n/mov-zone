@@ -5,7 +5,6 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
-import Button from "../Button";
 import PosterCard from "../PosterCard/PosterCard";
 
 import style from "./PosterCardList.module.scss";

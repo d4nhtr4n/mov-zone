@@ -80,8 +80,8 @@ function BackdropSlider() {
                             }}
                             navigation={true}
                             autoplay={{
-                                delay: 4000,
-                                disableOnInteraction: true,
+                                delay: 5000,
+                                disableOnInteraction: false,
                             }}
                             modules={[Autoplay, Navigation, Thumbs, Pagination]}
                         >
@@ -127,13 +127,22 @@ function BackdropSlider() {
                                 sliderData.map((slide, index) => {
                                     return (
                                         <SwiperSlide key={index}>
-                                            <div className={cx("thumbs-image")}>
+                                            <div
+                                                className={cx("thumbs-detail")}
+                                            >
                                                 <img
                                                     src={tmdbApi.getW500Image(
-                                                        slide.backdrop_path
+                                                        slide.poster_path
                                                     )}
                                                     alt=""
                                                 />
+                                                <span
+                                                    className={cx(
+                                                        "thumbs-name"
+                                                    )}
+                                                >
+                                                    {slide.name || slide.title}
+                                                </span>
                                             </div>
                                         </SwiperSlide>
                                     );

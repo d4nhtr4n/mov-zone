@@ -19,45 +19,47 @@
         width: 24px;
         border-radius: 4px;
     }
+}
 
-    .swiper-button-prev,
-    .swiper-button-next {
-        position: absolute;
-        top: 0;
-        width: 60px;
-        height: 100%;
+@keyframes wipeToRight {
+    from {
+        width: 0;
     }
-
-    .swiper-button-prev {
-        left: 0;
-
-        &:hover {
-            background: linear-gradient(90deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0) 100%);
-        }
-    }
-
-    .swiper-button-next {
-        right: 0;
-
-        &:hover {
-            background: linear-gradient(-90deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0) 100%);
-        }
+    to {
+        width: 100%;
     }
 }
 
 #backdrop-slider__thumbs {
     .swiper-slide {
-        filter: saturate(25%);
-        opacity: 0.75;
         transition: all 0.25s ease;
+        padding: 12px;
+        border-radius: 8px;
+        position: relative;
+        z-index: 1;
+        overflow: hidden;
 
         &:hover {
-            opacity: 1;
+            background-color: var(--overlay-1st-color);
+        }
+
+        &::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 0;
+            height: 100%;
+            background-color: var(--overlay-8th-color);
+            z-index: -1;
         }
     }
 
     .swiper-slide.swiper-slide-thumb-active {
-        filter: saturate(100%);
-        opacity: 1;
+        background-color: var(--overlay-4th-color);
+
+        &::after {
+            animation: wipeToRight 5s linear;
+        }
     }
 }

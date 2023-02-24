@@ -18,20 +18,35 @@
     @include Tablet {
         margin-top: 12px;
     }
+
+    .slide {
+        width: 100%;
+    }
 }
 
-.thumbs-image {
+.thumbs-detail {
     cursor: pointer;
-
+    height: 100%;
+    display: flex;
+    align-items: center;
     @include Tablet() {
         padding: 1px;
     }
 
     img {
         border-radius: 4px;
-        width: 100%;
         height: 100%;
         transition: 0.25s;
+    }
+
+    span {
+        flex: 1;
+        font-size: var(--text-h7);
+        margin-left: 8px;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
     }
 }
 
