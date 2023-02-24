@@ -6,6 +6,22 @@ const tmdbApi = {
         const url = `trending/${category}/week`;
         return axiosClient.get(url, params);
     },
+    getPopular: (category, params) => {
+        const url = `/${category}/popular`;
+        return axiosClient.get(url, params);
+    },
+    getTopRated: (category, params) => {
+        const url = `/${category}/top_rated`;
+        return axiosClient.get(url, params);
+    },
+    getNowPlayingMovies: (params) => {
+        const url = `/movie/now_playing`;
+        return axiosClient.get(url, params);
+    },
+    getOnTheAirTVs: (params) => {
+        const url = `/tv/on_the_air`;
+        return axiosClient.get(url, params);
+    },
     getMoviesList: (type, params) => {
         const url = `movie/${movieType[type]}`;
         return axiosClient.get(url, params);
@@ -42,6 +58,7 @@ const tmdbApi = {
         const url = `tv/${id}/season/${season_number}`;
         return axiosClient.get(url, { params: {} });
     },
+
     getGenres: (cate = category.movie) => {
         const url = `/genre/${cate}/list`;
         return axiosClient.get(url, { params: {} });

@@ -1,0 +1,56 @@
+$wrapper-padding: 6px;
+
+.wrapper {
+    border-radius: 12px;
+    position: relative;
+    height: 100%;
+    cursor: pointer;
+}
+
+.image-wrapper {
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.image {
+    z-index: 1;
+    width: 100%;
+    transform-origin: center;
+    transition: all 1.25s ease;
+
+    &:hover {
+        transform: scale(1.25);
+    }
+}
+
+// .rating {
+//     position: absolute;
+//     top: 20px;
+//     left: 0;
+//     padding: 4px;
+//     width: 32px;
+//     height: 24px;
+//     background-color: yellow;
+//     display: block;
+//     z-index: 3;
+// }
+
+.name {
+    font-size: var(--text-h6);
+    margin: 12px 0 6px;
+    font-weight: 400;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.genre {
+    font-size: var(--text-h7);
+    font-weight: 300;
+    color: var(--text-2nd-color);
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}

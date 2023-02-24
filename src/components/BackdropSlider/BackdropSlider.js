@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import { Col, Row, Container } from "react-bootstrap";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination, Thumbs } from "swiper";
@@ -5,18 +6,16 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
-
-import style from "./BackdropSlider.module.scss";
-import { useEffect, useRef, useState } from "react";
-
 import classNames from "classnames/bind";
 
 import { tmdbApi } from "~/api";
-import useWindowSize from "~/hooks/useWindowSize";
 import { useDebounce } from "~/hooks";
-import "./CustomSwiper.scss";
-import BackdropSliderItem from "./BackdropSliderItem";
 import { category } from "~/api/tmdbAPI/constant";
+import useWindowSize from "~/hooks/useWindowSize";
+import BackdropSliderItem from "./BackdropSliderItem";
+import "./CustomSwiper.scss";
+import style from "./BackdropSlider.module.scss";
+
 const cx = classNames.bind(style);
 
 function BackdropSlider() {
