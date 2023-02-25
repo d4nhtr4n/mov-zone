@@ -42,8 +42,12 @@ const tmdbApi = {
         const url = `discover/${category[cate]}`;
         return axiosClient.get(url, params);
     },
-    detail: (cate, id, params) => {
+    getDetail: (cate, id, params) => {
         const url = `${category[cate]}/${id}`;
+        return axiosClient.get(url, params);
+    },
+    getAlternativeTitles: (cate, id, params) => {
+        const url = `${category[cate]}/${id}/alternative_titles`;
         return axiosClient.get(url, params);
     },
     credits: (cate, id) => {

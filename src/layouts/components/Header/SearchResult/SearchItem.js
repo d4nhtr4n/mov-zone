@@ -15,7 +15,6 @@ const regionNamesInEnglish = new Intl.DisplayNames(["en"], {
 });
 
 function SearchItem({ data, onClick }) {
-    console.log(data);
     return (
         <Link
             to={`/watching/${data.media_type}/${data.id}`}

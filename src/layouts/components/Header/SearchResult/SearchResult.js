@@ -1,6 +1,5 @@
 import classNames from "classnames/bind";
 import { Link } from "react-router-dom";
-import ScrollView from "~/components/ScrollView";
 import SearchItem from "./SearchItem";
 
 import style from "./SearchResult.module.scss";
@@ -8,7 +7,6 @@ import style from "./SearchResult.module.scss";
 const cx = classNames.bind(style);
 
 function SearchResult({ data }) {
-    console.log(data);
     return (
         <div className={cx("search-group")}>
             <div className={cx("group-heading")}>
