@@ -11,11 +11,9 @@ const cx = classNames.bind(style);
 function PosterCard({ data }) {
     const genres = useLocalGenres(data.media_type, data.genre_ids);
     return (
-        <Link to={`/movie/${data.id}`}>
+        <Link to={`/watching/${data.media_type}/${data.id}`}>
             <div className={cx("wrapper")}>
-                <div className={cx("rating")}>
-                    {/* <span className={cx("point")}>8.5</span> */}
-                </div>
+                <div className={cx("rating")}></div>
                 <div className={cx("image-wrapper")}>
                     <Image
                         className={cx("image")}

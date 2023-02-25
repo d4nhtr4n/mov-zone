@@ -82,40 +82,15 @@
     }
 }
 
-.search-group {
-    padding-top: 12px;
-    display: flex;
-    flex-direction: column;
+.notify {
+    padding: 8px 16px;
+    margin: 0;
+    font-size: var(--text-h7);
+    font-weight: 400;
+    color: var(--text-3rd-color);
 
-    .group-heading {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-end;
-        padding: 0 16px;
-        margin-bottom: 4px;
-
-        .group-title {
-            font-size: var(--text-h6);
-            color: var(--primary-color);
-        }
-
-        .group-more {
-            font-size: var(--text-h8);
-
-            text-decoration: none;
-            font-weight: 300;
-            color: var(--text-2nd-color);
-
-            &:hover {
-                opacity: 0.9;
-                color: var(--primary-color);
-            }
-        }
-    }
-
-    &:hover {
-        .group-more {
-            display: block;
-        }
+    .icon {
+        font-size: 12px;
+        margin-right: 8px;
     }
 }

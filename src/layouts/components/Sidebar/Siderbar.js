@@ -21,9 +21,9 @@ const menu = [
         to: config.routes.home,
     },
     {
-        title: "Movie",
+        title: "Watching",
         icon: <FontAwesomeIcon icon={faFilm} />,
-        to: config.routes.movie,
+        to: config.routes.watching,
     },
     {
         title: "Filter",

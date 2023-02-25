@@ -6,7 +6,7 @@ import classNames from "classnames/bind";
 
 import { tmdbApi } from "~/api";
 import Image from "~/components/Image";
-import style from "./SearchItem.module.scss";
+import style from "./SearchResult.module.scss";
 
 const cx = classNames.bind(style);
 
@@ -15,10 +15,10 @@ const regionNamesInEnglish = new Intl.DisplayNames(["en"], {
 });
 
 function SearchItem({ data, onClick }) {
+    console.log(data);
     return (
         <Link
-            // to={`${config.routes.movie}/${data.id}`}
-            to={`/movie/${data.id}`}
+            to={`/watching/${data.media_type}/${data.id}`}
             className={cx("wrapper")}
             onClick={onClick}
         >
@@ -29,7 +29,7 @@ function SearchItem({ data, onClick }) {
             />
             <div className={cx("info")}>
                 <div className={cx("title")}>
-                    {data.title}
+                    {data.title || data.name}
                     {data.release_date && (
                         <span>{` (${data.release_date.split("-")[0]})`}</span>
                     )}

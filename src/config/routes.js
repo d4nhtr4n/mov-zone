@@ -1,6 +1,6 @@
 const routes = {
     home: "/",
-    movie: "/movie/:id",
+    watching: "/watching/:type/:id",
     filter: "/filter",
     ranking: "/ranking",
     following: "/following",

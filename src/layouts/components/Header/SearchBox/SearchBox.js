@@ -6,42 +6,58 @@ import { faCircleXmark } from "@fortawesome/free-regular-svg-icons";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
 import { Wrapper as PoperWrapper } from "~/components/Poper";
-import { Link } from "react-router-dom";
 import { category } from "~/api/tmdbAPI/constant";
 import { useDebounce } from "~/hooks";
-import SearchItem from "../SearchItem";
 import ScrollView from "~/components/ScrollView";
 import tmdbApi from "~/api/tmdbAPI";
 import style from "./SearchBox.module.scss";
+import SearchResult from "../SearchResult";
 
 const cx = classNames.bind(style);
 
 function SearchBox() {
     const [searchValue, setSearchValue] = useState("");
-    const [searchResult, setSearchResult] = useState([]);
-    const [showResult, setShowResult] = useState(true);
+    const [movieSearchResult, setMovieSearchResults] = useState([]);
+    const [tvSearchResults, setTvSearchResult] = useState([]);
+
+    const [showResult, setShowResult] = useState(false);
 
     const inputRef = useRef();
     const searchValueDebounced = useDebounce(searchValue, 500);
 
     useEffect(() => {
         if (!searchValueDebounced.trim()) {
-            setSearchResult([]);
+            setMovieSearchResults([]);
+            setTvSearchResult([]);
             return;
         }
 
-        (async function handleSearch() {
+        (async function handleSearchMovies() {
             const response = await tmdbApi.search(category.movie, {
                 params: {
-                    query: searchValue,
+                    query: searchValueDebounced,
                     page: 1,
                     language: "en-US",
                 },
             });
             let result = response.results;
-            if (result.length > 10) result = result.splice(0, 10);
+            if (result.length > 5) result = result.splice(0, 5);
 
-            setSearchResult(result);
+            setMovieSearchResults(result);
+        })();
+
+        (async function handleSearchTVs() {
+            const response = await tmdbApi.search(category.tv, {
+                params: {
+                    query: searchValueDebounced,
+                    page: 1,
+                    language: "en-US",
+                },
+            });
+            let result = response.results;
+            if (result.length > 5) result = result.splice(0, 5);
+
+            setTvSearchResult(result);
         })();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [searchValueDebounced]);
@@ -61,27 +77,41 @@ function SearchBox() {
         return (
             <div className={cx("search-result")} tabIndex="-1" {...attrs}>
                 <PoperWrapper>
-                    {searchResult && (
-                        <div className={cx("search-group")}>
-                            <div className={cx("group-heading")}>
-                                <h4 className={cx("group-title")}>
-                                    Search results for "{searchValue}"
-                                </h4>
-                                <Link to={""} className={cx("group-more")}>
-                                    Show more
-                                </Link>
-                            </div>
-                            <ScrollView>
-                                {searchResult.map((item) => (
-                                    <SearchItem
-                                        onClick={handleHideResult}
-                                        key={item.id}
-                                        data={item}
-                                    />
-                                ))}
-                            </ScrollView>
+                    <ScrollView>
+                        <div className={cx("notify")}>
+                            <FontAwesomeIcon
+                                className={cx("icon")}
+                                icon={faMagnifyingGlass}
+                            />
+                            <span>
+                                {tvSearchResults.length > 0 ||
+                                movieSearchResult.length > 0
+                                    ? `Results for "${searchValueDebounced}"`
+                                    : `There are no reults for "${searchValueDebounced}"`}
+                            </span>
                         </div>
-                    )}
+
+                        {movieSearchResult.length > 0 && (
+                            <SearchResult
+                                data={{
+                                    media_type: category.movie,
+                                    title: `Movies`,
+                                    result: movieSearchResult,
+                                    handleHideResult,
+                                }}
+                            />
+                        )}
+                        {tvSearchResults.length > 0 && (
+                            <SearchResult
+                                data={{
+                                    media_type: category.tv,
+                                    title: `TVs`,
+                                    result: tvSearchResults,
+                                    handleHideResult,
+                                }}
+                            />
+                        )}
+                    </ScrollView>
                 </PoperWrapper>
             </div>
         );
@@ -91,7 +121,7 @@ function SearchBox() {
         <div>
             <Tippy
                 interactive
-                visible={searchResult.length > 0 && showResult}
+                visible={searchValue && showResult}
                 placement="bottom-end"
                 render={(attrs) => renderResult(attrs)}
                 onClickOutside={handleHideResult}
@@ -107,15 +137,18 @@ function SearchBox() {
                         spellCheck="false"
                         value={searchValue}
                         onChange={handleInputChange}
-                        onFocus={() => setShowResult(true)}
+                        onFocus={() => {
+                            setShowResult(true);
+                        }}
                     />
                     {!!searchValue && (
                         <button
                             className={cx("search-clear")}
                             onClick={() => {
-                                setSearchValue("");
                                 inputRef.current.focus();
-                                setSearchResult([]);
+                                setSearchValue("");
+                                setMovieSearchResults([]);
+                                setTvSearchResult([]);
                             }}
                         >
                             <FontAwesomeIcon icon={faCircleXmark} />

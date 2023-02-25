@@ -81,7 +81,12 @@ function PosterCardList({ data }) {
                 {sliderData &&
                     sliderData.map((slider, index) => (
                         <SwiperSlide key={index}>
-                            <PosterCard data={slider} />
+                            <PosterCard
+                                data={{
+                                    ...slider,
+                                    media_type: data.media_type,
+                                }}
+                            />
                         </SwiperSlide>
                     ))}
             </Swiper>
