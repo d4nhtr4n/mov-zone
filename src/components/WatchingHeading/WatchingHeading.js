@@ -6,11 +6,11 @@ import { tmdbApi } from "~/api";
 import Button from "../Button";
 import Image from "../Image";
 
-import style from "./WatchingGeneralInfo.module.scss";
+import style from "./WatchingHeading.module.scss";
 
 const cx = classNames.bind(style);
 
-function WatchingGeneralInfo({ data }) {
+function WatchingHeading({ data }) {
     return (
         <div className={cx("wrapper")}>
             <div className={cx("background")}>
@@ -35,7 +35,7 @@ function WatchingGeneralInfo({ data }) {
                             )}
                             <ul className={cx("genre-list")}>
                                 {data.genres.map((genre, index) => (
-                                    <li>{genre.name}</li>
+                                    <li key={index}>{genre.name}</li>
                                 ))}
                             </ul>
                             {data.production_countries.length > 0 && (
@@ -85,4 +85,4 @@ function WatchingGeneralInfo({ data }) {
     );
 }
 
-export default WatchingGeneralInfo;
+export default WatchingHeading;

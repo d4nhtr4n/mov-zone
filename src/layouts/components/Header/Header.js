@@ -76,7 +76,7 @@ function Header() {
         console.log(MenuItem);
     };
 
-    useEffect(() => setCurrentUser({}), []);
+    useEffect(() => setCurrentUser(), []);
 
     return (
         <header className={cx("wrapper")}>

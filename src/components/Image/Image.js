@@ -1,4 +1,4 @@
-import { useState, forwardRef } from "react";
+import { forwardRef } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 
@@ -16,18 +16,17 @@ const Image = forwardRef(
         },
         ref
     ) => {
-        const [fallback, setFallback] = useState("");
-
-        const handleError = () => {
-            setFallback(customFallback);
+        const handleError = (e) => {
+            e.target.src = customFallback;
         };
 
         return (
             <img
                 className={classNames(styles.wrapper, className)}
                 ref={ref}
-                src={fallback || src}
+                src={src}
                 alt={alt}
+                loading="lazy"
                 {...props}
                 onError={handleError}
             />

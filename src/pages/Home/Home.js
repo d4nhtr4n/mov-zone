@@ -1,12 +1,16 @@
 import classNames from "classnames/bind";
+import React from "react";
 import { tmdbApi } from "~/api";
 import { category } from "~/api/tmdbAPI/constant";
 
 import BackdropSlider from "~/components/BackdropSlider/BackdropSlider";
-import PosterCardList from "~/components/PosterCardList";
 import style from "./Home.module.scss";
 
 const cx = classNames.bind(style);
+
+const LazyPosterCardList = React.lazy(() =>
+    import("~/components/PosterCardList")
+);
 
 const list = [
     {
@@ -98,7 +102,7 @@ function Home() {
             <div className={cx("list-group-wrapper")}>
                 <div className={cx("list-group")}>
                     {list.map((item, index) => (
-                        <PosterCardList key={index} data={item} />
+                        <LazyPosterCardList key={index} data={item} />
                     ))}
                 </div>
             </div>

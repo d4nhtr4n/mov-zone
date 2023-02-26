@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import { Col, Row, Container } from "react-bootstrap";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination, Thumbs } from "swiper";
 import "swiper/css";
@@ -15,6 +14,7 @@ import useWindowSize from "~/hooks/useWindowSize";
 import BackdropSliderItem from "./BackdropSliderItem";
 import "./CustomSwiper.scss";
 import style from "./BackdropSlider.module.scss";
+import Image from "../Image";
 
 const cx = classNames.bind(style);
 
@@ -54,104 +54,93 @@ function BackdropSlider() {
     }, [windowWidthDebounced]);
 
     return (
-        <Container fluid="md" className={cx("wrapper")}>
-            <Row>
-                <Col md={10}>
-                    <div id="backdrop-slider__slider">
-                        <Swiper
-                            ref={mainSlider}
-                            thumbs={{
-                                swiper:
-                                    imagesNavSlider &&
-                                    !imagesNavSlider.destroyed
-                                        ? imagesNavSlider
-                                        : null,
-                                slideThumbActiveClass:
-                                    "swiper-slide-thumb-active",
-                            }}
-                            className={cx("slider-wrapper")}
-                            direction="horizontal"
-                            slidesPerView={1}
-                            spaceBetween={32}
-                            loop={true}
-                            pagination={{
-                                dynamicBullets: true,
-                                clickable: true,
-                            }}
-                            navigation={true}
-                            autoplay={{
-                                delay: 5000,
-                                disableOnInteraction: false,
-                            }}
-                            modules={[Autoplay, Navigation, Thumbs, Pagination]}
-                        >
-                            {sliderData &&
-                                sliderData.map((slide, index) => {
-                                    return (
-                                        <SwiperSlide key={index}>
-                                            <BackdropSliderItem data={slide} />
-                                        </SwiperSlide>
-                                    );
-                                })}
-                        </Swiper>
-                    </div>
-                </Col>
+        <div className={cx("wrapper")}>
+            <div className={cx("main-slider-wrapper")}>
+                <div id="backdrop-slider__slider">
+                    <Swiper
+                        ref={mainSlider}
+                        thumbs={{
+                            swiper:
+                                imagesNavSlider && !imagesNavSlider.destroyed
+                                    ? imagesNavSlider
+                                    : null,
+                            slideThumbActiveClass: "swiper-slide-thumb-active",
+                        }}
+                        className={cx("main-slider")}
+                        direction="horizontal"
+                        slidesPerView={1}
+                        spaceBetween={32}
+                        loop={true}
+                        pagination={{
+                            dynamicBullets: true,
+                            clickable: true,
+                        }}
+                        autoplay={{
+                            delay: 5000,
+                            disableOnInteraction: false,
+                        }}
+                        modules={[Autoplay, Thumbs, Pagination]}
+                    >
+                        {sliderData &&
+                            sliderData.map((slide, index) => {
+                                return (
+                                    <SwiperSlide key={index}>
+                                        <BackdropSliderItem data={slide} />
+                                    </SwiperSlide>
+                                );
+                            })}
+                    </Swiper>
+                </div>
+            </div>
 
-                <Col md={2} className="d-none d-sm-block">
-                    <div id="backdrop-slider__thumbs">
-                        <Swiper
-                            ref={thumbSlider}
-                            style={{ height: navSliderHeight }}
-                            className={cx("slider-thumbs")}
-                            onSwiper={(swiper) => {
-                                setImagesNavSlider(swiper);
-                            }}
-                            direction="vertical"
-                            loop={true}
-                            loopedSlides={10}
-                            slidesPerView={5}
-                            centeredSlides={true}
-                            centeredSlidesBounds={true}
-                            breakpoints={{
-                                0: {
-                                    direction: "horizontal",
-                                },
-                                768: {
-                                    direction: "vertical",
-                                    spaceBetween: 12,
-                                },
-                            }}
-                            modules={[Navigation, Thumbs]}
-                        >
-                            {sliderData &&
-                                sliderData.map((slide, index) => {
-                                    return (
-                                        <SwiperSlide key={index}>
-                                            <div
-                                                className={cx("thumbs-detail")}
-                                            >
-                                                <img
-                                                    src={tmdbApi.getW500Image(
-                                                        slide.poster_path
-                                                    )}
-                                                    alt=""
-                                                />
-                                                <span
-                                                    className={cx(
-                                                        "thumbs-name"
-                                                    )}
-                                                >
-                                                    {slide.name || slide.title}
-                                                </span>
-                                            </div>
-                                        </SwiperSlide>
-                                    );
-                                })}
-                        </Swiper>
-                    </div>
-                </Col>
-            </Row>
-        </Container>
+            <div className={cx("thumbs-slider-wrapper")}>
+                <div id="backdrop-slider__thumbs">
+                    <Swiper
+                        ref={thumbSlider}
+                        style={{ height: navSliderHeight }}
+                        className={cx("thumbs-slider")}
+                        onSwiper={(swiper) => {
+                            setImagesNavSlider(swiper);
+                        }}
+                        direction="vertical"
+                        loop={true}
+                        loopedSlides={10}
+                        slidesPerView={5}
+                        centeredSlides={true}
+                        centeredSlidesBounds={true}
+                        breakpoints={{
+                            0: {
+                                direction: "horizontal",
+                            },
+                            768: {
+                                direction: "vertical",
+                                spaceBetween: 12,
+                            },
+                        }}
+                        modules={[Navigation, Thumbs]}
+                    >
+                        {sliderData &&
+                            sliderData.map((slide, index) => {
+                                return (
+                                    <SwiperSlide key={index}>
+                                        <div className={cx("thumb-detail")}>
+                                            <Image
+                                                src={tmdbApi.getW500Image(
+                                                    slide.poster_path
+                                                )}
+                                                alt=""
+                                            />
+                                            <span className={cx("thumbs-name")}>
+                                                {slide.name || slide.title}
+                                            </span>
+                                        </div>
+                                    </SwiperSlide>
+                                );
+                            })}
+                    </Swiper>
+                </div>
+            </div>
+        </div>
     );
 }
 

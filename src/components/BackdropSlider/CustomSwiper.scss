@@ -21,15 +21,6 @@
     }
 }
 
-@keyframes wipeToRight {
-    from {
-        width: 0;
-    }
-    to {
-        width: 100%;
-    }
-}
-
 #backdrop-slider__thumbs {
     .swiper-slide {
         transition: all 0.25s ease;
@@ -38,6 +29,8 @@
         position: relative;
         z-index: 1;
         overflow: hidden;
+        transform-origin: center;
+        transform: scale(0.9);
 
         &:hover {
             background-color: var(--overlay-1st-color);
@@ -57,9 +50,20 @@
 
     .swiper-slide.swiper-slide-thumb-active {
         background-color: var(--overlay-4th-color);
+        transform: scale(1);
+        transition: all 0.1s linear;
 
         &::after {
             animation: wipeToRight 5s linear;
+        }
+    }
+
+    @keyframes wipeToRight {
+        from {
+            width: 0;
+        }
+        to {
+            width: 100%;
         }
     }
 }
