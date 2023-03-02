@@ -6,7 +6,7 @@ import classNames from "classnames/bind";
 import { tmdbApi } from "~/api";
 import Image from "~/components/Image";
 import style from "./SearchResult.module.scss";
-import useLocalGenres from "~/hooks/useLocalGenres";
+import { useLocalGenres } from "~/hooks";
 
 const cx = classNames.bind(style);
 

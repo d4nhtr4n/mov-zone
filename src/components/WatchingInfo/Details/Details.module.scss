@@ -1,0 +1,56 @@
+@import "src/styles/mixins";
+
+.wrapper {
+    display: flex;
+    // min-height: 100vh;
+
+    @include Mobile() {
+        flex-direction: column;
+    }
+}
+
+.info-list,
+.plot {
+    flex: 1;
+    font-size: var(--text-h6);
+}
+
+.info-list {
+    padding-right: 16px;
+    li {
+        display: flex;
+        & + li {
+            margin-top: 8px;
+        }
+
+        .title {
+            display: inline-block;
+            width: 35%;
+        }
+
+        .content,
+        .content-link {
+            display: inline-block;
+            flex: 1;
+        }
+    }
+}
+
+.plot {
+    padding-left: 16px;
+}
+
+.title {
+    font-weight: 400;
+}
+
+.content,
+.content-link {
+    font-weight: 300;
+}
+
+.content-link {
+    &:hover {
+        text-decoration: underline;
+    }
+}

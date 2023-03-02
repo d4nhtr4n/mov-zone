@@ -7,7 +7,7 @@ import Button from "../Button";
 import Image from "../Image";
 
 import style from "./BackdropSlider.module.scss";
-import useLocalGenres from "~/hooks/useLocalGenres";
+import { useLocalGenres } from "~/hooks";
 
 const cx = classNames.bind(style);
 

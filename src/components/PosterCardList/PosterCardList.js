@@ -20,16 +20,16 @@ function PosterCardList({ data }) {
         (async function handleGetTrending() {
             const response = await data.api();
             let result = response.results;
-            if (result.length > 10) result = result.splice(0, 10);
 
             setSliderData(result);
         })();
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [data]);
 
     return (
-        sliderData && (
+        sliderData &&
+        sliderData.length > 0 && (
             <div className={cx("wrapper")}>
                 <div className={cx("heading")}>
                     <div className={cx("info")}>
@@ -58,6 +58,7 @@ function PosterCardList({ data }) {
                         prevEl: navPrev.current,
                         nextEl: navNext.current,
                         disabledClass: cx("nav-disable"),
+                        hiddenClass: cx("nav-hidden"),
                     }}
                     onBeforeInit={(swiper) => {
                         swiper.params.navigation.prevEl = navPrev.current;
@@ -67,14 +68,17 @@ function PosterCardList({ data }) {
                         0: {
                             slidesPerView: 1.5,
                             spaceBetween: 12,
+                            slidesPerGroup: 1,
                         },
                         576: {
                             slidesPerView: 4,
                             spaceBetween: 18,
+                            slidesPerGroup: 4,
                         },
                         768: {
                             slidesPerView: 5,
                             spaceBetween: 24,
+                            slidesPerGroup: 5,
                         },
                     }}
                     modules={[Navigation]}

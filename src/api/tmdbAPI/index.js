@@ -46,16 +46,20 @@ const tmdbApi = {
         const url = `${category[cate]}/${id}`;
         return axiosClient.get(url, params);
     },
-    getAlternativeTitles: (cate, id, params) => {
-        const url = `${category[cate]}/${id}/alternative_titles`;
-        return axiosClient.get(url, params);
-    },
-    credits: (cate, id) => {
+    getCredits: (cate, id) => {
         const url = `${category[cate]}/${id}/credits`;
         return axiosClient.get(url, { params: {} });
     },
-    similar: (cate, id) => {
+    getMovieCollection: (id) => {
+        const url = `collection/${id}`;
+        return axiosClient.get(url, { params: {} });
+    },
+    getSimilar: (cate, id) => {
         const url = `${category[cate]}/${id}/similar`;
+        return axiosClient.get(url, { params: {} });
+    },
+    getRecommendations: (cate, id) => {
+        const url = `${category[cate]}/${id}/recommendations`;
         return axiosClient.get(url, { params: {} });
     },
     getTVSeasons: (id, season_number) => {

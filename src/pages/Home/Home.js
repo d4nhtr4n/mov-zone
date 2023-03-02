@@ -1,5 +1,6 @@
 import classNames from "classnames/bind";
-import React from "react";
+import React, { Suspense } from "react";
+import { Container } from "react-bootstrap";
 import { tmdbApi } from "~/api";
 import { category } from "~/api/tmdbAPI/constant";
 
@@ -99,13 +100,15 @@ function Home() {
     return (
         <div className={cx("wrapper")}>
             <BackdropSlider />
-            <div className={cx("list-group-wrapper")}>
+            <Container className={cx("list-group-wrapper")}>
                 <div className={cx("list-group")}>
                     {list.map((item, index) => (
-                        <LazyPosterCardList key={index} data={item} />
+                        <Suspense key={index} fallback={<></>}>
+                            <LazyPosterCardList key={index} data={item} />
+                        </Suspense>
                     ))}
                 </div>
-            </div>
+            </Container>
         </div>
     );
 }

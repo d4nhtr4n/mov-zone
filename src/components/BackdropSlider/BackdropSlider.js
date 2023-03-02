@@ -8,9 +8,7 @@ import "swiper/css/scrollbar";
 import classNames from "classnames/bind";
 
 import { tmdbApi } from "~/api";
-import { useDebounce } from "~/hooks";
 import { category } from "~/api/tmdbAPI/constant";
-import useWindowSize from "~/hooks/useWindowSize";
 import BackdropSliderItem from "./BackdropSliderItem";
 import "./CustomSwiper.scss";
 import style from "./BackdropSlider.module.scss";
@@ -22,13 +20,8 @@ function BackdropSlider() {
     const [imagesNavSlider, setImagesNavSlider] = useState(null);
     const [navSliderHeight, setNavSliderHeight] = useState("");
 
-    const windowSize = useWindowSize();
-    const windowWidthDebounced = useDebounce(windowSize.width, 100);
-
-    const mainSlider = useRef();
-    const thumbSlider = useRef();
-
     const [sliderData, setSliderData] = useState(null);
+    const thumbSwiper = useRef();
 
     useEffect(() => {
         (async function handleGetTrending() {
@@ -44,21 +37,11 @@ function BackdropSlider() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    useEffect(() => {
-        if (window.innerWidth >= 768) {
-            const newHeight = mainSlider.current.offsetHeight;
-            setNavSliderHeight(`${newHeight}px`);
-        } else {
-            setNavSliderHeight("auto");
-        }
-    }, [windowWidthDebounced]);
-
     return (
         <div className={cx("wrapper")}>
             <div className={cx("main-slider-wrapper")}>
                 <div id="backdrop-slider__slider">
                     <Swiper
-                        ref={mainSlider}
                         thumbs={{
                             swiper:
                                 imagesNavSlider && !imagesNavSlider.destroyed
@@ -79,6 +62,16 @@ function BackdropSlider() {
                             delay: 5000,
                             disableOnInteraction: false,
                         }}
+                        onResize={(swiper) => {
+                            // Set vertical thumbs swiper height equal to main swiper height
+                            let newHeight;
+                            if (window.innerWidth >= 768) {
+                                newHeight = swiper.height;
+                                setNavSliderHeight(`${newHeight}px`);
+                            } else {
+                                setNavSliderHeight("auto");
+                            }
+                        }}
                         modules={[Autoplay, Thumbs, Pagination]}
                     >
                         {sliderData &&
@@ -96,7 +89,7 @@ function BackdropSlider() {
             <div className={cx("thumbs-slider-wrapper")}>
                 <div id="backdrop-slider__thumbs">
                     <Swiper
-                        ref={thumbSlider}
+                        ref={thumbSwiper}
                         style={{ height: navSliderHeight }}
                         className={cx("thumbs-slider")}
                         onSwiper={(swiper) => {
@@ -105,6 +98,7 @@ function BackdropSlider() {
                         direction="vertical"
                         loop={true}
                         loopedSlides={10}
+                        spaceBetween={12}
                         slidesPerView={5}
                         centeredSlides={true}
                         centeredSlidesBounds={true}
@@ -114,7 +108,6 @@ function BackdropSlider() {
                             },
                             768: {
                                 direction: "vertical",
-                                spaceBetween: 12,
                             },
                         }}
                         modules={[Navigation, Thumbs]}

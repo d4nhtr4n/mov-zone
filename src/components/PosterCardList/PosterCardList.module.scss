@@ -1,6 +1,8 @@
 @import "/src/styles/mixins";
 .wrapper {
-    margin-top: 42px;
+    & + .wrapper {
+        margin-top: 42px;
+    }
 
     &:hover {
         .more-btn {
@@ -74,14 +76,15 @@
 
     .nav-disable {
         color: var(--text-disable-color);
-
-        &:hover {
-            background-color: var(--overlay-1st-color);
-        }
+        pointer-events: none;
     }
 
     .nav-next {
         margin-left: 8px;
+    }
+
+    .nav-hidden {
+        display: none;
     }
 
     @include Mobile {
