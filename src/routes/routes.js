@@ -9,6 +9,7 @@ import config from "~/config";
 
 const publicRoutes = [
     { path: config.routes.home, component: Home },
+    { path: config.routes.watchingNotYet, component: Watching },
     { path: config.routes.watching, component: Watching },
     { path: config.routes.filter, component: Filter },
     { path: config.routes.ranking, component: Ranking },

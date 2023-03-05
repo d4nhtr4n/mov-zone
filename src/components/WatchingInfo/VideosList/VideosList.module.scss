@@ -1,5 +1,34 @@
+.thumb-img-wrapper {
+    position: relative;
+
+    .play-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 28px;
+        color: rgba($color: #ffffff, $alpha: 0.75);
+        background-color: rgba($color: #000000, $alpha: 0.5);
+        visibility: hidden;
+    }
+}
+
 .video-thumb {
     width: 100%;
+    padding: 4px;
+    border-radius: 8px;
+    cursor: pointer;
+
+    &:hover {
+        .play-overlay {
+            color: rgba($color: #ffffff, $alpha: 0.75);
+            visibility: visible;
+        }
+    }
 
     .video-image {
         width: 100%;
@@ -16,6 +45,14 @@
         -webkit-box-orient: vertical;
         overflow: hidden;
         margin-top: 8px;
+    }
+}
+
+.thumb-selected {
+    .play-overlay {
+        font-size: 32px;
+
+        visibility: visible;
     }
 }
 

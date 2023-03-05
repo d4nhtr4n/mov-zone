@@ -1,5 +1,6 @@
 const routes = {
     home: "/",
+    watchingNotYet: "/watching",
     watching: "/watching/:type/:id",
     filter: "/filter",
     ranking: "/ranking",

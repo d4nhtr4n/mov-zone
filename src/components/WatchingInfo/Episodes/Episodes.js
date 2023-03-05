@@ -7,6 +7,9 @@ import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { tmdbApi } from "~/api";
 import { category } from "~/api/tmdbAPI/constant";
+import images from "~/assets/images";
+import Button from "~/components/Button";
+import FallBack from "~/components/FallBack";
 import Image from "~/components/Image";
 import PosterCard from "~/components/PosterCard";
 import style from "./Episodes.module.scss";
@@ -14,24 +17,36 @@ import style from "./Episodes.module.scss";
 const cx = classNames.bind(style);
 
 function Episodes({ data }) {
-    const [currentSeasonNumber, setCurrentSeasonNumber] = useState(
-        data.seasons[0]
-    );
-    const [currentSeason, setCurrentSeason] = useState();
+    const [haveSeasons, setHaveSeasons] = useState(null);
+    const [currentSeason, setCurrentSeason] = useState(null);
+    const [currentSeasonDetails, setCurrentSeasonDetails] = useState(null);
+
+    // Check data and Auto show first season when change data
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    useEffect(() => {
+        if (data.seasons.length > 0) {
+            setHaveSeasons(true);
+            setCurrentSeason(data.seasons[0]);
+        } else setHaveSeasons(false);
+    }, [data]);
 
     useEffect(() => {
-        (async function handleGetTrending() {
+        if (!currentSeason) return;
+
+        (async function handleGetSeasonDetails() {
             const response = await tmdbApi.getTVSeasons(
                 data.id,
-                currentSeasonNumber.season_number
+                currentSeason.season_number
             );
             let result = response;
 
-            setCurrentSeason(result);
+            setCurrentSeasonDetails(result);
         })();
-    }, [data.id, currentSeasonNumber]);
+    }, [data, currentSeason]);
 
-    return (
+    console.log(data);
+
+    return haveSeasons ? (
         <div className={cx("wrapper")}>
             <div className={cx("seasons")}>
                 <Swiper
@@ -56,7 +71,8 @@ function Episodes({ data }) {
                     {data.seasons.map((season, index) => (
                         <SwiperSlide key={index}>
                             <PosterCard
-                                onClick={() => setCurrentSeasonNumber(season)}
+                                selected={currentSeason === season}
+                                onClick={() => setCurrentSeason(season)}
                                 data={{
                                     ...season,
                                     media_type: category.tv,
@@ -67,53 +83,83 @@ function Episodes({ data }) {
                 </Swiper>
             </div>
 
-            {currentSeason && (
+            {currentSeasonDetails && (
                 <div className={cx("season-wrapper")}>
                     <div className={cx("season-info")}>
                         <div className={cx("season-heading")}>
                             <h3 className={cx("season-name")}>
-                                {currentSeason.name}
+                                {currentSeasonDetails.name}
                             </h3>
                             <h3 className={cx("season-episodes-count")}>
-                                {`Episodes Count: ${currentSeason.episodes.length}`}
+                                {`Episodes Count: ${currentSeasonDetails.episodes.length}`}
                             </h3>
                         </div>
-                        {currentSeason.overview && (
+                        {currentSeasonDetails.overview && (
                             <p className={cx("season-overview")}>
-                                {currentSeason.overview}
+                                {currentSeasonDetails.overview}
                             </p>
                         )}
                     </div>
                     <Container>
                         <Row>
-                            {currentSeason.episodes.map((episode, index) => (
-                                <Col key={index} md={2}>
-                                    <Link
-                                        to=""
-                                        className={cx("episode-wrapper")}
-                                    >
-                                        <div className={cx("episode-thumb")}>
-                                            <Image
-                                                className={cx("episode-image")}
-                                                src={tmdbApi.getW200Image(
-                                                    episode.still_path
-                                                )}
-                                            />
-                                            <div className={cx("episode-play")}>
-                                                <FontAwesomeIcon
-                                                    icon={faCirclePlay}
+                            {currentSeasonDetails.episodes.map(
+                                (episode, index) => (
+                                    <Col key={index} md={2}>
+                                        <Link
+                                            to=""
+                                            className={cx("episode-wrapper")}
+                                        >
+                                            <div
+                                                className={cx("episode-thumb")}
+                                            >
+                                                <Image
+                                                    className={cx(
+                                                        "episode-image"
+                                                    )}
+                                                    small
+                                                    src={tmdbApi.getW200Image(
+                                                        episode.still_path
+                                                    )}
                                                 />
+                                                <div
+                                                    className={cx(
+                                                        "episode-play"
+                                                    )}
+                                                >
+                                                    <FontAwesomeIcon
+                                                        icon={faCirclePlay}
+                                                    />
+                                                </div>
                                             </div>
-                                        </div>
-                                        <span>{episode.name}</span>
-                                    </Link>
-                                </Col>
-                            ))}
+                                            <span>{episode.name}</span>
+                                        </Link>
+                                    </Col>
+                                )
+                            )}
                         </Row>
                     </Container>
                 </div>
             )}
         </div>
+    ) : (
+        <FallBack
+            data={{
+                image: images.noData,
+                title: "No Episodes Found",
+                detail: `Sorry! We don't have episode data for ${
+                    data.name || data.title
+                }. You can continue viewing other information or go back to the home page. We apologize for any inconvenience.
+                `,
+                buttons: [
+                    <Button to="/" className={cx("button")} primary>
+                        Go Home
+                    </Button>,
+                    <Button to="/" className={cx("button")} outline>
+                        Discover Others
+                    </Button>,
+                ],
+            }}
+        />
     );
 }
 

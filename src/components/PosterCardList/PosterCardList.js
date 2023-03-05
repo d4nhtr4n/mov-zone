@@ -11,21 +11,28 @@ import style from "./PosterCardList.module.scss";
 
 const cx = classNames.bind(style);
 
-function PosterCardList({ data }) {
+function PosterCardList({ data, onFail = () => {}, onSuccess = () => {} }) {
     const [sliderData, setSliderData] = useState(null);
     const navPrev = useRef();
     const navNext = useRef();
 
     useEffect(() => {
-        (async function handleGetTrending() {
+        (async function handleGetData() {
             const response = await data.api();
             let result = response.results;
-
             setSliderData(result);
         })();
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [data]);
+
+    useEffect(() => {
+        if (sliderData) {
+            if (sliderData.length <= 0) onFail();
+            else onSuccess();
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [sliderData]);
 
     return (
         sliderData &&

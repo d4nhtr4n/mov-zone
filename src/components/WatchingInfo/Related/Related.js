@@ -6,6 +6,9 @@ import PosterCard from "~/components/PosterCard";
 
 import classNames from "classnames/bind";
 import style from "./Related.module.scss";
+import FallBack from "~/components/FallBack";
+import images from "~/assets/images";
+import Button from "~/components/Button";
 
 const LazyPosterCardList = React.lazy(() =>
     import("~/components/PosterCardList")
@@ -14,8 +17,12 @@ const LazyPosterCardList = React.lazy(() =>
 const cx = classNames.bind(style);
 
 function Related({ data }) {
+    // Check 3 list (collection, related, recommend)
+    const [haveSimilar, setHaveSimilar] = useState(true);
+    const [haveRecommend, setHaveRecommend] = useState(true);
+
     const [list, setList] = useState();
-    const [collection, setCollection] = useState();
+    const [collection, setCollection] = useState(null);
 
     useEffect(() => {
         setList([
@@ -23,12 +30,23 @@ function Related({ data }) {
                 media_type: data.media_type,
                 title: "Similars",
                 api: () => tmdbApi.getSimilar(data.media_type, data.id),
+                onFail: () => {
+                    setHaveSimilar(false);
+                },
+                onSuccess: () => {
+                    setHaveSimilar(true);
+                },
             },
             {
                 media_type: data.media_type,
-
                 title: "Recommendations",
                 api: () => tmdbApi.getRecommendations(data.media_type, data.id),
+                onFail: () => {
+                    setHaveRecommend(false);
+                },
+                onSuccess: () => {
+                    setHaveRecommend(true);
+                },
             },
         ]);
 
@@ -41,11 +59,13 @@ function Related({ data }) {
 
                 setCollection(result);
             })();
-        } else setCollection(null);
+        } else {
+            setCollection(null);
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [data]);
 
-    return (
+    return collection || haveSimilar || haveRecommend ? (
         <div className={cx("wrapper")}>
             {collection && (
                 <div
@@ -110,10 +130,34 @@ function Related({ data }) {
             {list &&
                 list.map((item, index) => (
                     <Suspense key={index} fallback={<></>}>
-                        <LazyPosterCardList key={index} data={item} />
+                        <LazyPosterCardList
+                            key={index}
+                            data={item}
+                            onFail={item.onFail}
+                            onSuccess={item.onSuccess}
+                        />
                     </Suspense>
                 ))}
         </div>
+    ) : (
+        <FallBack
+            data={{
+                image: images.noData,
+                title: "No Related Found",
+                detail: `Sorry! We don't have similars or recommendations data for ${
+                    data.name || data.title
+                }. You can continue viewing other information or go back to the home page. We apologize for any inconvenience.
+                `,
+                buttons: [
+                    <Button to="/" className={cx("button")} primary>
+                        Go Home
+                    </Button>,
+                    <Button to="/" className={cx("button")} outline>
+                        Discover Others
+                    </Button>,
+                ],
+            }}
+        />
     );
 }
 

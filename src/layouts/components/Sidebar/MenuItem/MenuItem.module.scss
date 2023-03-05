@@ -1,0 +1,44 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    width: 72px;
+    height: 72px;
+    border-radius: 16px;
+
+    & + .wrapper {
+        margin-top: 4px;
+    }
+
+    &:hover {
+        background: var(--overlay-3rd-color);
+    }
+
+    &.active {
+        background: var(--primary-gradient);
+
+        .icon,
+        .title {
+            color: var(--text-1st-color);
+        }
+    }
+
+    .icon,
+    .title {
+        color: var(--text-2nd-color);
+    }
+
+    .icon {
+        font-size: 18px;
+        display: block;
+        display: flex;
+        justify-content: center;
+    }
+
+    .title {
+        font-size: var(--text-h8);
+        font-weight: 400;
+        margin-top: 6px;
+    }
+}

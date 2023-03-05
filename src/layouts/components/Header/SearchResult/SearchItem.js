@@ -19,6 +19,7 @@ function SearchItem({ data, onClick }) {
             onClick={onClick}
         >
             <Image
+                small={true}
                 className={cx("poster")}
                 src={`${tmdbApi.getOriginalImage(data.backdrop_path)}`}
                 alt=""

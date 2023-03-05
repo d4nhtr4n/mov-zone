@@ -8,7 +8,7 @@ import style from "./PosterCard.module.scss";
 
 const cx = classNames.bind(style);
 
-function PosterCard({ data, onClick, ...passProps }) {
+function PosterCard({ data, selected = false, onClick, ...passProps }) {
     const genres = useLocalGenres(data.media_type, data.genre_ids);
 
     let Comp = Link;
@@ -24,13 +24,25 @@ function PosterCard({ data, onClick, ...passProps }) {
 
     return (
         <Comp {...props}>
-            <div className={cx("wrapper")}>
-                <div className={cx("rating")}></div>
-                <div className={cx("image-wrapper")}>
-                    <Image
-                        className={cx("image")}
-                        src={tmdbApi.getW500Image(data.poster_path)}
-                    />
+            <div
+                className={cx("wrapper", {
+                    "card-selected": selected,
+                })}
+            >
+                <div className={cx("poster")}>
+                    <div className={cx("image-wrapper")}>
+                        <Image
+                            className={cx("image")}
+                            src={tmdbApi.getW500Image(data.poster_path)}
+                        />
+                    </div>
+                    {data.vote_average >= 0 && (
+                        <span className={cx("rating")}>
+                            {Number(data.vote_average) > 0
+                                ? Math.round(data.vote_average * 10) / 10
+                                : "N/A"}
+                        </span>
+                    )}
                 </div>
                 <h3 className={cx("name")}>{data.title || data.name}</h3>
                 <p className={cx("genre")}>{genres.join(", ")}</p>

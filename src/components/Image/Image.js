@@ -12,10 +12,13 @@ const Image = forwardRef(
             alt,
             className,
             fallback: customFallback = images.noImage,
+            small = false,
             ...props
         },
         ref
     ) => {
+        if (small) customFallback = images.noImageSm;
+
         const handleError = (e) => {
             e.target.src = customFallback;
         };
