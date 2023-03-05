@@ -7,42 +7,83 @@ import WatchingHeading from "~/components/WatchingHeading";
 import style from "./Watching.module.scss";
 import WatchingInfo from "~/components/WatchingInfo";
 import { Container } from "react-bootstrap";
+import WatchingTracking from "~/components/WatchingTracking";
 
 const cx = classNames.bind(style);
 
 function Movie() {
     const params = useParams();
-    const [data, setData] = useState();
+    const [data, setData] = useState(null);
+    const [haveData, setHaveData] = useState(true);
 
     useEffect(() => {
-        // if (Object.values(params).some((value) => value.includes(":"))) {
-        //     return;
-        // }
+        // Check empty params
+        // If params empty -> data null -> render WatchingTracking
+        if (Object.keys(params).length === 0) {
+            setHaveData(false);
+            return;
+        }
 
         (async function handleGetData() {
             const response = await tmdbApi.getDetail(params.type, params.id, {
                 params: {},
             });
-
+            if (response.length <= 0) setHaveData(false);
+            else setHaveData(true);
             setData({ ...response, media_type: params.type });
         })();
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [params]);
 
-    return (
-        <div>
-            {data && (
-                <>
-                    <WatchingHeading data={data} />
-                    <Container className={cx("content-wrapper")}>
-                        <div className={cx("content")}>
-                            <WatchingInfo data={data} />
-                        </div>
-                    </Container>
-                </>
-            )}
-        </div>
+    // Push data to localStorage: recently_skimmed
+    useEffect(() => {
+        if (data) {
+            let recentlySkimmed =
+                JSON.parse(localStorage.getItem(`recently_skimmed`)) || [];
+            const loopedIndex = recentlySkimmed.findIndex(
+                (recent) =>
+                    recent.id === data.id &&
+                    recent.media_type === data.media_type
+            );
+
+            if (loopedIndex === 0) {
+                // This data is save in the front, no action needed
+                return;
+            } else {
+                if (loopedIndex > 0) {
+                    // Data stored in middle of array -> bring to front
+                    recentlySkimmed.unshift(
+                        recentlySkimmed.splice(loopedIndex, 1)[0]
+                    );
+                } else if (loopedIndex < 0) {
+                    // Un save data -> add to front
+                    recentlySkimmed.unshift(data);
+                    // limit at 20 items
+                    if (recentlySkimmed.length > 20)
+                        recentlySkimmed = recentlySkimmed.splice(0, 20);
+                }
+                localStorage.setItem(
+                    "recently_skimmed",
+                    JSON.stringify(recentlySkimmed)
+                );
+            }
+        }
+    }, [data]);
+
+    return haveData ? (
+        data && (
+            <>
+                <WatchingHeading data={data} />
+                <Container className={cx("content-wrapper")}>
+                    <div className={cx("content")}>
+                        <WatchingInfo data={data} />
+                    </div>
+                </Container>
+            </>
+        )
+    ) : (
+        <WatchingTracking />
     );
 }
 

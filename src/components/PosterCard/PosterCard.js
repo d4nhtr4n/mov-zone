@@ -9,7 +9,8 @@ import style from "./PosterCard.module.scss";
 const cx = classNames.bind(style);
 
 function PosterCard({ data, selected = false, onClick, ...passProps }) {
-    const genres = useLocalGenres(data.media_type, data.genre_ids);
+    let genres = useLocalGenres(data.media_type, data.genre_ids);
+    if (data.genres) genres = data.genres.map((genre) => genre.name);
 
     let Comp = Link;
     const props = {
