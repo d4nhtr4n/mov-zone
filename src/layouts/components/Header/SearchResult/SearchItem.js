@@ -14,7 +14,7 @@ function SearchItem({ data, onClick }) {
     const genres = useLocalGenres(data.media_type, data.genre_ids);
     return (
         <Link
-            to={`/watching/${data.media_type}/${data.id}`}
+            to={`/view/${data.media_type}/${data.id}`}
             className={cx("wrapper")}
             onClick={onClick}
         >

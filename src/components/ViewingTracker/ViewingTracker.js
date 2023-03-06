@@ -1,12 +1,12 @@
 import { Container } from "react-bootstrap";
 import classNames from "classnames/bind";
 
+import style from "./ViewingTracker.module.scss";
 import PosterCardSwiper from "../PosterCardSwiper";
-import style from "./WatchingTracking.module.scss";
 
 const cx = classNames.bind(style);
 
-function WatchingTracking() {
+function ViewingTracker() {
     const recentlySkimmed = JSON.parse(
         localStorage.getItem(`recently_skimmed`)
     );
@@ -27,4 +27,4 @@ function WatchingTracking() {
     );
 }
 
-export default WatchingTracking;
+export default ViewingTracker;

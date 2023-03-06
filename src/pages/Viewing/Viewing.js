@@ -1,24 +1,24 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import classNames from "classnames/bind";
-
-import { tmdbApi } from "~/api";
-import WatchingHeading from "~/components/WatchingHeading";
-import style from "./Watching.module.scss";
-import WatchingInfo from "~/components/WatchingInfo";
 import { Container } from "react-bootstrap";
-import WatchingTracking from "~/components/WatchingTracking";
+
+import ViewingHeading from "~/components/ViewingHeading";
+import ViewingInfo from "~/components/ViewingInfo";
+import { tmdbApi } from "~/api";
+import style from "./Viewing.module.scss";
+import ViewingTracker from "~/components/ViewingTracker";
 
 const cx = classNames.bind(style);
 
-function Movie() {
+function Viewing() {
     const params = useParams();
     const [data, setData] = useState(null);
     const [haveData, setHaveData] = useState(true);
 
     useEffect(() => {
         // Check empty params
-        // If params empty -> data null -> render WatchingTracking
+        // If params empty -> data null -> render ViewingTracking
         if (Object.keys(params).length === 0) {
             setHaveData(false);
             return;
@@ -74,17 +74,17 @@ function Movie() {
     return haveData ? (
         data && (
             <>
-                <WatchingHeading data={data} />
+                <ViewingHeading data={data} />
                 <Container className={cx("content-wrapper")}>
                     <div className={cx("content")}>
-                        <WatchingInfo data={data} />
+                        <ViewingInfo data={data} />
                     </div>
                 </Container>
             </>
         )
     ) : (
-        <WatchingTracking />
+        <ViewingTracker />
     );
 }
 
-export default Movie;
+export default Viewing;

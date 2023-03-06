@@ -4,7 +4,6 @@ import {
     faFilter,
     faGear,
     faHome,
-    faRankingStar,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classNames from "classnames/bind";
@@ -24,8 +23,8 @@ const MENU = [
     {
         title: "Watching",
         icon: <FontAwesomeIcon icon={faFilm} />,
-        to: config.routes.watchingNotYet,
-        activePaths: [config.routes.watchingNotYet, config.routes.watching],
+        to: config.routes.viewingTracking,
+        activePaths: [config.routes.viewingTracking, config.routes.viewing],
     },
     {
         title: "Following",

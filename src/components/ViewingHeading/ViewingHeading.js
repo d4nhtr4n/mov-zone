@@ -6,11 +6,11 @@ import { tmdbApi } from "~/api";
 import Button from "../Button";
 import Image from "../Image";
 
-import style from "./WatchingHeading.module.scss";
+import style from "./ViewingHeading.module.scss";
 
 const cx = classNames.bind(style);
 
-function WatchingHeading({ data }) {
+function ViewingHeading({ data }) {
     return (
         <div className={cx("wrapper")}>
             <div className={cx("background")}>
@@ -85,4 +85,4 @@ function WatchingHeading({ data }) {
     );
 }
 
-export default WatchingHeading;
+export default ViewingHeading;

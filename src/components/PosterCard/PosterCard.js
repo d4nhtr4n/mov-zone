@@ -14,7 +14,7 @@ function PosterCard({ data, selected = false, onClick, ...passProps }) {
 
     let Comp = Link;
     const props = {
-        to: `/watching/${data.media_type}/${data.id}`,
+        to: `/view/${data.media_type}/${data.id}`,
         ...passProps,
     };
 

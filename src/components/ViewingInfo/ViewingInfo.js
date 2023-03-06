@@ -5,7 +5,7 @@ import Related from "./Related";
 import Episodes from "./Episodes";
 import VideosList from "./VideosList";
 
-function WatchingInfo({ data }) {
+function ViewingInfo({ data }) {
     let TABS = [
         {
             title: "DETAILS",
@@ -41,4 +41,4 @@ function WatchingInfo({ data }) {
     return <BTabs tabs={TABS} />;
 }
 
-export default WatchingInfo;
+export default ViewingInfo;
