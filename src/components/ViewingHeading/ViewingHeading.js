@@ -1,6 +1,7 @@
 import { faBookmark, faPlay } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classNames from "classnames/bind";
+import { useEffect, useState } from "react";
 
 import { tmdbApi } from "~/api";
 import { category } from "~/api/tmdbApi/constant";
@@ -12,6 +13,7 @@ import style from "./ViewingHeading.module.scss";
 const cx = classNames.bind(style);
 
 function ViewingHeading({ data }) {
+    const [disableWatching, setDisableWatching] = useState(false);
     function handleWatchUrl() {
         let watchUrl = `/watch/${data.media_type}/${data.id}`;
         if (data && data.media_type === category.tv) {
@@ -22,6 +24,15 @@ function ViewingHeading({ data }) {
         }
         return watchUrl;
     }
+
+    useEffect(() => {
+        if (
+            data.media_type === category.movie &&
+            Date.now() - Date.parse(data.release_date) < 0
+        ) {
+            setDisableWatching(true);
+        } else setDisableWatching(false);
+    }, [data]);
 
     return (
         <div className={cx("wrapper")}>
@@ -78,6 +89,7 @@ function ViewingHeading({ data }) {
                                 to={handleWatchUrl()}
                                 className={cx("button")}
                                 primary
+                                disabled={disableWatching}
                                 leftIcon={<FontAwesomeIcon icon={faPlay} />}
                             >
                                 Watch
