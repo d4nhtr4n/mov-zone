@@ -3,10 +3,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classNames from "classnames/bind";
 import { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { tmdbApi } from "~/api";
-import { category } from "~/api/tmdbAPI/constant";
+import { category } from "~/api/tmdbApi/constant";
 import images from "~/assets/images";
 import Button from "~/components/Button";
 import FallBack from "~/components/FallBack";
@@ -39,12 +39,10 @@ function Episodes({ data }) {
                 currentSeason.season_number
             );
             let result = response;
-
+            console.log(result);
             setCurrentSeasonDetails(result);
         })();
     }, [data, currentSeason]);
-
-    console.log(data);
 
     return haveSeasons ? (
         <div className={cx("wrapper")}>
@@ -102,11 +100,16 @@ function Episodes({ data }) {
                     </div>
                     <Container>
                         <Row>
-                            {currentSeasonDetails.episodes.map(
-                                (episode, index) => (
+                            {currentSeasonDetails.episodes
+                                .filter(
+                                    (episode) =>
+                                        Date.now() >
+                                        Date.parse(episode.air_date)
+                                )
+                                .map((episode, index) => (
                                     <Col key={index} md={2}>
                                         <Link
-                                            to=""
+                                            to={`/watch/${data.media_type}/${data.id}/${currentSeasonDetails.season_number}/${episode.episode_number}`}
                                             className={cx("episode-wrapper")}
                                         >
                                             <div
@@ -134,8 +137,7 @@ function Episodes({ data }) {
                                             <span>{episode.name}</span>
                                         </Link>
                                     </Col>
-                                )
-                            )}
+                                ))}
                         </Row>
                     </Container>
                 </div>

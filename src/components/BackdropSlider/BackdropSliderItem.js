@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlay } from "@fortawesome/free-solid-svg-icons";
+import { faCircleInfo, faPlay } from "@fortawesome/free-solid-svg-icons";
 
 import { tmdbApi } from "~/api";
 import classNames from "classnames/bind";
@@ -8,6 +8,8 @@ import Image from "../Image";
 
 import style from "./BackdropSlider.module.scss";
 import { useLocalGenres } from "~/hooks";
+import { category } from "~/api/tmdbApi/constant";
+import { useEffect, useState } from "react";
 
 const cx = classNames.bind(style);
 
@@ -16,7 +18,29 @@ const regionNamesInEnglish = new Intl.DisplayNames(["en"], {
 });
 
 function BackdropSliderItem({ data }) {
+    const [details, setDetails] = useState();
     const genres = useLocalGenres(data.media_type, data.genre_ids);
+
+    function handleWatchUrl() {
+        let watchUrl = `/watch/${data.media_type}/${data.id}`;
+        if (details && data.media_type === category.tv) {
+            watchUrl = watchUrl.concat(
+                "",
+                `/${details.last_episode_to_air.season_number}/${details.last_episode_to_air.episode_number}/`
+            );
+        }
+        return watchUrl;
+    }
+
+    useEffect(() => {
+        (async function handleGetDetails() {
+            const response = await tmdbApi.getDetail(data.media_type, data.id, {
+                params: {},
+            });
+            let result = response;
+            setDetails(result);
+        })();
+    }, [data]);
 
     const date = data.release_date || data.first_air_date;
 
@@ -43,13 +67,28 @@ function BackdropSliderItem({ data }) {
                                 )}
                             </li>
                         </ul>
-                        <Button
-                            primary
-                            large
-                            leftIcon={<FontAwesomeIcon icon={faPlay} />}
-                        >
-                            Watch now
-                        </Button>
+                        {details && (
+                            <div>
+                                <Button
+                                    to={handleWatchUrl()}
+                                    primary
+                                    large
+                                    leftIcon={<FontAwesomeIcon icon={faPlay} />}
+                                >
+                                    Watch now
+                                </Button>
+                                <Button
+                                    to={`/view/${data.media_type}/${data.id}`}
+                                    outline
+                                    large
+                                    leftIcon={
+                                        <FontAwesomeIcon icon={faCircleInfo} />
+                                    }
+                                >
+                                    Details
+                                </Button>
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>

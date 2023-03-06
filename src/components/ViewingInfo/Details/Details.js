@@ -1,7 +1,7 @@
 import classNames from "classnames/bind";
 import { useEffect, useState } from "react";
 import { tmdbApi } from "~/api";
-import { category } from "~/api/tmdbAPI/constant";
+import { category } from "~/api/tmdbApi/constant";
 
 import style from "./Details.module.scss";
 

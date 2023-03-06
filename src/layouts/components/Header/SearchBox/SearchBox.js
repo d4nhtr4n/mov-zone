@@ -6,10 +6,10 @@ import { faCircleXmark } from "@fortawesome/free-regular-svg-icons";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
 import { Wrapper as PoperWrapper } from "~/components/Poper";
-import { category } from "~/api/tmdbAPI/constant";
+import { category } from "~/api/tmdbApi/constant";
 import { useDebounce } from "~/hooks";
 import ScrollView from "~/components/ScrollView";
-import tmdbApi from "~/api/tmdbAPI";
+import tmdbApi from "~/api/tmdbApi";
 import style from "./SearchBox.module.scss";
 import SearchResult from "../SearchResult";
 

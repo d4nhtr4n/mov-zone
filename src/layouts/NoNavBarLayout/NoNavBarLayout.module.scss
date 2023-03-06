@@ -1,0 +1,28 @@
+@import "/src/styles/mixins";
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    display: flex;
+    background-color: var(--bg-color);
+    margin-top: var(--header-height);
+    min-height: calc(100vh - var(--header-height));
+}
+
+.content {
+    flex: 1;
+    padding: 0;
+    overflow: hidden;
+    padding-top: 16px;
+
+    @include Tablet() {
+        padding: 0 20px 0 20px;
+    }
+
+    @include Mobile() {
+        padding: 0 12px 0 12px;
+    }
+}

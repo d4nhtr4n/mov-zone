@@ -1,1 +1,1 @@
-export { default as tmdbApi } from "./tmdbAPI";
+export { default as tmdbApi } from "./tmdbApi";

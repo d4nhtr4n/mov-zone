@@ -1,4 +1,4 @@
-import { category } from "~/api/tmdbAPI/constant";
+import { category } from "~/api/tmdbApi/constant";
 import BTabs from "../BTabs";
 import Details from "./Details";
 import Related from "./Related";

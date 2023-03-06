@@ -69,11 +69,12 @@ $gradient: linear-gradient(90deg, #6603a0 0%, #2aeefa 50%, #6603a0 100%);
 }
 
 .outline {
-    color: var(--primary-color);
     background-color: transparent;
+    color: var(--primary-color);
     border-color: var(--primary-color);
 
     &:hover {
+        color: var(--primary-color);
         background-color: var(--primary-color-0005);
     }
 }
@@ -87,8 +88,11 @@ $gradient: linear-gradient(90deg, #6603a0 0%, #2aeefa 50%, #6603a0 100%);
 // Button sizes
 .small {
     font-size: var(--text-h7);
+    font-weight: 500;
     min-width: 88px;
     padding: 4px 16px;
+
+    width: 16px;
 }
 
 .large {

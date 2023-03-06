@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classNames from "classnames/bind";
 
 import { tmdbApi } from "~/api";
+import { category } from "~/api/tmdbApi/constant";
 import Button from "../Button";
 import Image from "../Image";
 
@@ -11,6 +12,17 @@ import style from "./ViewingHeading.module.scss";
 const cx = classNames.bind(style);
 
 function ViewingHeading({ data }) {
+    function handleWatchUrl() {
+        let watchUrl = `/watch/${data.media_type}/${data.id}`;
+        if (data && data.media_type === category.tv) {
+            watchUrl = watchUrl.concat(
+                "",
+                `/${data.last_episode_to_air.season_number}/${data.last_episode_to_air.episode_number}/`
+            );
+        }
+        return watchUrl;
+    }
+
     return (
         <div className={cx("wrapper")}>
             <div className={cx("background")}>
@@ -63,6 +75,7 @@ function ViewingHeading({ data }) {
                         </div>
                         <div className={cx("action")}>
                             <Button
+                                to={handleWatchUrl()}
                                 className={cx("button")}
                                 primary
                                 leftIcon={<FontAwesomeIcon icon={faPlay} />}

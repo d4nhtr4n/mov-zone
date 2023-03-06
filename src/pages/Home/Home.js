@@ -2,7 +2,7 @@ import classNames from "classnames/bind";
 import React, { Suspense } from "react";
 import { Container } from "react-bootstrap";
 import { tmdbApi } from "~/api";
-import { category } from "~/api/tmdbAPI/constant";
+import { category } from "~/api/tmdbApi/constant";
 
 import BackdropSlider from "~/components/BackdropSlider/BackdropSlider";
 import style from "./Home.module.scss";

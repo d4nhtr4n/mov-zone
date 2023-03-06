@@ -24,7 +24,12 @@ const MENU = [
         title: "Watching",
         icon: <FontAwesomeIcon icon={faFilm} />,
         to: config.routes.viewingTracking,
-        activePaths: [config.routes.viewingTracking, config.routes.viewing],
+        activePaths: [
+            config.routes.viewingTracking,
+            config.routes.viewing,
+            config.routes.watchDefault,
+            config.routes.watchTv,
+        ],
     },
     {
         title: "Following",
