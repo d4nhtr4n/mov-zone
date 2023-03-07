@@ -29,6 +29,8 @@ function Related({ data }) {
             {
                 media_type: data.media_type,
                 title: "Similars",
+                description:
+                    "Explore movies that are similar in theme, genre, or style to your favorites.",
                 api: () => tmdbApi.getSimilar(data.media_type, data.id),
                 onFail: () => {
                     setHaveSimilar(false);
@@ -40,6 +42,8 @@ function Related({ data }) {
             {
                 media_type: data.media_type,
                 title: "Recommendations",
+                description:
+                    "Let us recommend movies tailored to your interests and taste.",
                 api: () => tmdbApi.getRecommendations(data.media_type, data.id),
                 onFail: () => {
                     setHaveRecommend(false);

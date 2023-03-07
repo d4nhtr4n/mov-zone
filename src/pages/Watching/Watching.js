@@ -45,7 +45,7 @@ function Watching() {
                 params: {},
             });
             let result = response;
-            setDetails(result);
+            setDetails({ media_type: params.type, ...result });
         })();
 
         (async function handleGetEpisodeInfo() {
@@ -62,11 +62,15 @@ function Watching() {
             {
                 media_type: params.type,
                 title: "Similars",
+                description:
+                    "Explore movies that are similar in theme, genre, or style to your favorites.",
                 api: () => tmdbApi.getSimilar(params.type, params.id),
             },
             {
                 media_type: params.type,
                 title: "Recommendations",
+                description:
+                    "Let us recommend movies tailored to your interests and taste.",
                 api: () => tmdbApi.getRecommendations(params.type, params.id),
             },
         ]);
@@ -85,6 +89,37 @@ function Watching() {
                 setCollection(result);
             })();
         } else setCollection(null);
+
+        // Save to localStorage
+        let recentlyWatching =
+            JSON.parse(localStorage.getItem(`recently_watching`)) || [];
+        const loopedIndex = recentlyWatching.findIndex(
+            (recent) =>
+                recent.id === detail.id &&
+                recent.media_type === detail.media_type
+        );
+
+        if (loopedIndex === 0) {
+            // This data is save in the front, no action needed
+            return;
+        } else {
+            if (loopedIndex > 0) {
+                // Data stored in middle of array -> bring to front
+                recentlyWatching.unshift(
+                    recentlyWatching.splice(loopedIndex, 1)[0]
+                );
+            } else if (loopedIndex < 0) {
+                // Un save data -> add to front
+                recentlyWatching.unshift(detail);
+                // limit at 20 items
+                if (recentlyWatching.length > 20)
+                    recentlyWatching = recentlyWatching.splice(0, 20);
+            }
+            localStorage.setItem(
+                "recently_watching",
+                JSON.stringify(recentlyWatching)
+            );
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [detail]);
 

@@ -28,6 +28,7 @@ function PosterCardList({ data, onFail = () => {}, onSuccess = () => {} }) {
             <PosterCardSwiper
                 data={{
                     title: data.title,
+                    description: data.description,
                     slides: sliderData,
                     media_type: data.media_type,
                 }}

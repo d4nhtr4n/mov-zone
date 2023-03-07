@@ -19,12 +19,24 @@
 
 .info {
     display: flex;
-    align-items: flex-end;
+    flex-direction: column;
+    // align-items: flex-end;
+
+    .title-wrapper {
+        display: flex;
+        align-items: flex-end;
+        margin-bottom: 12px;
+    }
 
     .title {
         margin: 0;
         position: relative;
-        font-size: var(--text-h5);
+        font-size: var(--text-h4);
+        font-weight: 600;
+        background: var(--primary-gradient);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
     }
 
     .more-wrapper {
@@ -55,6 +67,7 @@
 
 .navigation {
     display: flex;
+    align-items: flex-end;
 
     .nav-prev,
     .nav-next {
@@ -93,4 +106,9 @@
     @include Tablet {
         display: none;
     }
+}
+
+.description {
+    font-size: var(--text-h6);
+    font-weight: 300;
 }

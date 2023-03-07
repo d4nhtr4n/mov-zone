@@ -17,6 +17,7 @@ const list = [
     {
         media_type: category.movie,
         title: "Trending Movies",
+        description: "The most talked-about movies right now.",
         api: () =>
             tmdbApi.getTrendingList(category.movie, {
                 params: {},
@@ -24,8 +25,8 @@ const list = [
     },
     {
         media_type: category.tv,
-
         title: "Trending TVs",
+        description: "The hottest TV shows of the moment.",
         api: () =>
             tmdbApi.getTrendingList(category.tv, {
                 params: {},
@@ -33,8 +34,9 @@ const list = [
     },
     {
         media_type: category.movie,
-
         title: "Popular Movies",
+        description:
+            "Get swept up in the hype surrounding the most popular movies.",
         api: () =>
             tmdbApi.getPopular(category.movie, {
                 params: {},
@@ -42,8 +44,8 @@ const list = [
     },
     {
         media_type: category.tv,
-
         title: "Popular TVs",
+        description: "Join us on a journey through the most popular TV shows.",
         api: () =>
             tmdbApi.getPopular(category.tv, {
                 params: {},
@@ -51,8 +53,8 @@ const list = [
     },
     {
         media_type: category.movie,
-
         title: "Top Rated Movies",
+        description: "Explore the highest-rated movies of all time.",
         api: () =>
             tmdbApi.getTopRated(category.movie, {
                 params: {},
@@ -60,8 +62,9 @@ const list = [
     },
     {
         media_type: category.tv,
-
         title: "Top Rated TVs",
+        description:
+            "Discover the most critically acclaimed and beloved TV shows",
         api: () =>
             tmdbApi.getTopRated(category.tv, {
                 params: {},
@@ -69,8 +72,9 @@ const list = [
     },
     {
         media_type: category.movie,
-
         title: "Highest-grossing Movies ",
+        description:
+            "Join us on a journey through the highest-grossing movies.",
         api: () =>
             tmdbApi.discover(category.movie, {
                 params: { sort_by: "revenue.desc" },
@@ -78,8 +82,9 @@ const list = [
     },
     {
         media_type: category.movie,
-
         title: "Movies on The Theater Now",
+        description:
+            "Stay up-to-date with the latest movies hitting the big screen right now.",
         api: () =>
             tmdbApi.getNowPlayingMovies({
                 params: {},
@@ -87,8 +92,9 @@ const list = [
     },
     {
         media_type: category.tv,
-
         title: "TVs on The Air",
+        description:
+            "Stay in the loop with the latest and greatest TV shows currently on the air.",
         api: () =>
             tmdbApi.getOnTheAirTVs({
                 params: {},

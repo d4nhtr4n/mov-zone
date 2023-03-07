@@ -28,8 +28,8 @@ function Viewing() {
             const response = await tmdbApi.getDetail(params.type, params.id, {
                 params: {},
             });
-            if (response.length <= 0) setHaveData(false);
-            else setHaveData(true);
+            if (response) setHaveData(true);
+            else setHaveData(false);
             setData({ ...response, media_type: params.type });
         })();
 
