@@ -14,6 +14,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import PosterCardSwiper from "~/components/PosterCardSwiper";
 import PosterCardList from "~/components/PosterCardList";
+import Seasons from "~/components/Seasons";
+import { category } from "~/api/tmdbApi/constant";
 
 const cx = classNames.bind(style);
 
@@ -24,6 +26,7 @@ function Watching() {
     const [episodeInfo, setEpisodeInfo] = useState("");
     const [collection, setCollection] = useState();
     const [detail, setDetails] = useState("");
+
     const [list, setList] = useState();
 
     // Display url with params
@@ -84,9 +87,6 @@ function Watching() {
         } else setCollection(null);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [detail]);
-
-    console.log(detail);
-    console.log(episodeInfo);
 
     return (
         <Container>
@@ -174,6 +174,19 @@ function Watching() {
                     </div>
                 </div>
             </div>
+
+            {params.type === category.tv && detail && (
+                <div className={cx("seasons-wrapper")}>
+                    <Seasons
+                        simplify={true}
+                        epSelectable={true}
+                        data={detail}
+                        defaultSeason={params.season}
+                        defaultEpisode={params.episode}
+                    />
+                </div>
+            )}
+
             <div className={cx("list")}>
                 {collection && (
                     <PosterCardSwiper
@@ -187,12 +200,7 @@ function Watching() {
                 {list &&
                     list.map((item, index) => (
                         <Suspense key={index} fallback={<></>}>
-                            <PosterCardList
-                                key={index}
-                                data={item}
-                                onFail={item.onFail}
-                                onSuccess={item.onSuccess}
-                            />
+                            <PosterCardList key={index} data={item} />
                         </Suspense>
                     ))}
             </div>

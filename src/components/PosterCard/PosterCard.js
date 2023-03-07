@@ -25,11 +25,7 @@ function PosterCard({ data, selected = false, onClick, ...passProps }) {
 
     return (
         <Comp {...props}>
-            <div
-                className={cx("wrapper", {
-                    "card-selected": selected,
-                })}
-            >
+            <div className={cx("wrapper")}>
                 <div className={cx("poster")}>
                     <div className={cx("image-wrapper")}>
                         <Image

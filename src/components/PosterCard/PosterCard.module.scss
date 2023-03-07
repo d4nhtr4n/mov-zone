@@ -5,21 +5,8 @@ $wrapper-padding: 6px;
     position: relative;
     height: 100%;
     cursor: pointer;
-    transform: translateY(12px);
     transition: all 0.1s ease;
-    padding-bottom: 12px;
     padding-right: 12px;
-}
-
-.card-selected {
-    transform: translateY(0);
-    .name {
-        font-weight: 600;
-        background-color: transparent;
-        background: var(--primary-gradient);
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
 }
 
 .image-wrapper {
