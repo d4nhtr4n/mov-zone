@@ -9,9 +9,10 @@ const routes = {
     ranking: "/ranking",
     following: "/following",
     setting: "/setting",
-
-    // /authen
-    // /welcome
+    login: "/login",
+    register: "/register",
+    forgotPassword: "/forgotpassword",
+    resetPassword: "/resetpassword/:token",
 };
 
 export default routes;

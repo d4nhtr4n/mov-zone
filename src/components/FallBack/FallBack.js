@@ -1,13 +1,10 @@
 import classNames from "classnames/bind";
-import images from "~/assets/images";
 import Image from "~/components/Image";
-import Button from "../Button";
 import style from "./FallBack.module.scss";
 
 const cx = classNames.bind(style);
 
 function FallBack({ data }) {
-    const Comp = data.buttons[0];
     return (
         <div className={cx("wrapper")}>
             <div className={cx("inner")}>

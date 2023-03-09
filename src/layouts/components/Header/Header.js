@@ -1,12 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-    faGlobe,
-    faLanguage,
-    faRepeat,
-    faRightFromBracket,
-} from "@fortawesome/free-solid-svg-icons";
+import { faPlus, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import classNames from "classnames/bind";
 
 import DropdownMenu from "~/components/DropdownMenu";
@@ -16,67 +11,45 @@ import SearchBox from "./SearchBox";
 import images from "~/assets/images";
 import config from "~/config";
 import style from "./Header.module.scss";
+import usersApi from "~/api/usersApi";
 
 const cx = classNames.bind(style);
 
-const userMenuItems = [
-    {
-        leftIcon: <FontAwesomeIcon icon={faLanguage} />,
-        name: "Language",
-        children: {
-            title: "Language",
-            data: [
-                {
-                    type: "language",
-                    code: "en",
-                    name: "English",
-                },
-                {
-                    type: "language",
-                    code: "vi",
-                    name: "Tiếng Việt",
-                },
-            ],
-        },
-    },
-    {
-        leftIcon: <FontAwesomeIcon icon={faGlobe} />,
-        name: "Location",
-        breakPoint: true,
-    },
-    {
-        leftIcon: <FontAwesomeIcon icon={faRepeat} />,
-        name: "Switch user",
-        children: {
-            title: "Accounts",
-            data: [
-                {
-                    type: "account",
-                    code: "dt",
-                    name: "Danh Tran",
-                },
-                {
-                    type: "account",
-                    code: "tqd",
-                    name: "Tran Quoc Danh",
-                },
-            ],
-        },
-    },
-    {
-        leftIcon: <FontAwesomeIcon icon={faRightFromBracket} />,
-        name: "Log out",
-        to: "/auth",
-    },
-];
-
 function Header() {
-    const [currentUser, setCurrentUser] = useState(undefined);
-    const handleDropDownMenuChange = (MenuItem) => {
-        console.log(MenuItem);
-    };
+    const [user, setUser] = useState();
+    const authToken = localStorage.getItem("auth_token");
 
-    useEffect(() => setCurrentUser(), []);
+    const userMenuItems = [
+        {
+            leftIcon: <FontAwesomeIcon icon={faPlus} />,
+            name: "New account",
+            to: "./register",
+        },
+        {
+            leftIcon: <FontAwesomeIcon icon={faRightFromBracket} />,
+            name: "Log out",
+            onClick: () => {
+                setUser(null);
+                localStorage.removeItem("auth_token");
+            },
+        },
+    ];
+
+    useEffect(() => {
+        if (!authToken) return;
+        (async function handleLogin() {
+            try {
+                const response = await usersApi.getMyProfile(authToken);
+                if (response.success) setUser(response.data);
+            } catch (error) {
+                setUser(null);
+            }
+        })();
+    }, [authToken]);
+
+    const handleDropDownMenuChange = (MenuItem) => {
+        // console.log(MenuItem);
+    };
 
     return (
         <header className={cx("wrapper")}>
@@ -88,31 +61,8 @@ function Header() {
                 <SearchBox />
 
                 <div className={cx("user-action")}>
-                    {currentUser ? (
+                    {user ? (
                         <div className={cx("user-section")}>
-                            {/* User notifications */}
-
-                            {/* <Tippy
-                                    interactive
-                                    placement="bottom-end"
-                                    
-                                    render={(attrs) => (
-                                        <div
-                                            className={cx("")}
-                                            tabIndex="-1"
-                                            {...attrs}
-                                        >
-                                            <PoperWrapper>
-                                                <p>Features in development</p>
-                                            </PoperWrapper>
-                                        </div>
-                                    )}
-                                >
-                                    <div className={cx("user-notify")}>
-                                        <FontAwesomeIcon icon={faBell} />
-                                    </div>
-                                </Tippy> */}
-
                             <DropdownMenu
                                 items={userMenuItems}
                                 onChange={handleDropDownMenuChange}
@@ -126,8 +76,12 @@ function Header() {
                         </div>
                     ) : (
                         <>
-                            <Button outline>Log in</Button>
-                            <Button primary>Sign up</Button>
+                            <Button to="/login" outline>
+                                Sign in
+                            </Button>
+                            <Button to="/register" primary>
+                                Sign up
+                            </Button>
                         </>
                     )}
                 </div>

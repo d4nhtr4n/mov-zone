@@ -47,6 +47,7 @@ function DropdownMenu({
                     key={index}
                     data={item}
                     onClick={() => {
+                        console.log(item);
                         const haveChild = !!item.children;
                         if (haveChild) {
                             setDropdownHistory((prev) => [
@@ -54,7 +55,7 @@ function DropdownMenu({
                                 item.children,
                             ]);
                         } else {
-                            onChange(item);
+                            item.onClick();
                         }
                     }}
                 ></MenuItem>

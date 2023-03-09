@@ -8,10 +8,38 @@ import Setting from "~/pages/Setting";
 
 import config from "~/config";
 import NoNavBarLayout from "~/layouts/NoNavBarLayout";
+import Login from "~/pages/Authentication/Login";
+import AuthenticationLayout from "~/layouts/AuthenticationLayout";
+import Register from "~/pages/Authentication/Register";
+import ForgotPassword from "~/pages/Authentication/ForgotPassword";
+import ResetPassword from "~/pages/Authentication/ResetPassword";
 
 const publicRoutes = [
     { path: config.routes.default, component: Home },
     { path: config.routes.home, component: Home },
+
+    {
+        path: config.routes.login,
+        component: Login,
+        layout: AuthenticationLayout,
+    },
+
+    {
+        path: config.routes.register,
+        component: Register,
+        layout: AuthenticationLayout,
+    },
+    {
+        path: config.routes.forgotPassword,
+        component: ForgotPassword,
+        layout: AuthenticationLayout,
+    },
+    {
+        path: config.routes.resetPassword,
+        component: ResetPassword,
+        layout: AuthenticationLayout,
+    },
+
     { path: config.routes.viewingTracking, component: Viewing },
     { path: config.routes.viewing, component: Viewing },
     {

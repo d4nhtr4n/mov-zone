@@ -4,6 +4,7 @@ const images = {
     noImage: require("~/assets/images/no-image-lg.jpg"),
     noImageSm: require("~/assets/images/no-image-sm.jpg"),
     noData: require("~/assets/images/no-data.png"),
+    robot: require("~/assets/images/robot.png"),
 };
 
 export default images;
