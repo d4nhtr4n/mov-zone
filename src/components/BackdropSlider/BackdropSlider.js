@@ -8,7 +8,7 @@ import "swiper/css/scrollbar";
 import classNames from "classnames/bind";
 
 import { tmdbApi } from "~/api";
-import { category } from "~/api/tmdbApi/constant";
+import { category } from "~/api/constant";
 import BackdropSliderItem from "./BackdropSliderItem";
 import "./CustomSwiper.scss";
 import style from "./BackdropSlider.module.scss";

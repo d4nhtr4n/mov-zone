@@ -15,7 +15,8 @@ import {
 import PosterCardSwiper from "~/components/PosterCardSwiper";
 import PosterCardList from "~/components/PosterCardList";
 import Seasons from "~/components/Seasons";
-import { category } from "~/api/tmdbApi/constant";
+import { category } from "~/api/constant";
+import FollowButton from "~/components/FollowButton";
 
 const cx = classNames.bind(style);
 
@@ -152,39 +153,46 @@ function Watching() {
                     >
                         Back
                     </Button>
+
                     {detail && (
-                        <div className={cx("heading")}>
-                            <h1 className={cx("name")}>
-                                {detail.name || detail.title}
-                            </h1>
-                            {detail.tagline && (
-                                <q className={cx("tagline")}>
-                                    {detail.tagline}
-                                </q>
-                            )}
-                            <div className={cx("detail-button")}>
-                                <Button
-                                    to={`/view/${params.type}/${params.id}`}
-                                    text
-                                    small
-                                    leftIcon={
-                                        <FontAwesomeIcon icon={faCircleInfo} />
-                                    }
-                                >
-                                    Details
-                                </Button>
-                            </div>
-                            <p className={cx("genres")}>
-                                {`Genres: ${detail.genres
-                                    .map((genre) => genre.name)
-                                    .join(", ")}`}
-                            </p>
-                            {detail.runtime && (
-                                <p className={cx("runtime")}>
-                                    {`Run time: ${detail.runtime} minutes`}
+                        <>
+                            <div className={cx("heading")}>
+                                <h1 className={cx("name")}>
+                                    {detail.name || detail.title}
+                                </h1>
+                                {detail.tagline && (
+                                    <q className={cx("tagline")}>
+                                        {detail.tagline}
+                                    </q>
+                                )}
+
+                                <div className={cx("detail-button")}>
+                                    <Button
+                                        to={`/view/${params.type}/${params.id}`}
+                                        text
+                                        small
+                                        leftIcon={
+                                            <FontAwesomeIcon
+                                                icon={faCircleInfo}
+                                            />
+                                        }
+                                    >
+                                        Details
+                                    </Button>
+                                </div>
+                                <FollowButton large data={detail} />
+                                <p className={cx("genres")}>
+                                    {`Genres: ${detail.genres
+                                        .map((genre) => genre.name)
+                                        .join(", ")}`}
                                 </p>
-                            )}
-                        </div>
+                                {detail.runtime && (
+                                    <p className={cx("runtime")}>
+                                        {`Run time: ${detail.runtime} minutes`}
+                                    </p>
+                                )}
+                            </div>
+                        </>
                     )}
 
                     {episodeInfo && (
@@ -199,14 +207,6 @@ function Watching() {
                             )}
                         </>
                     )}
-                    <div className={cx("follow-button")}>
-                        <Button
-                            primary
-                            leftIcon={<FontAwesomeIcon icon={faBookmark} />}
-                        >
-                            Follow
-                        </Button>
-                    </div>
                 </div>
             </div>
 

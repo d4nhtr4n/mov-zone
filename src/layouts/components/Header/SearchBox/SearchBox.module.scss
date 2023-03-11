@@ -10,12 +10,12 @@
     padding: 0 8px;
     font-size: var(--text-h7);
 
-    background-color: var(--search-bg-color);
+    background-color: var(--overlay-1st-color);
     color: var(--search-color);
     display: flex;
     justify-content: center;
     border-radius: calc(var(--search-height) / 2);
-    border: 1px solid var(--search-border-color);
+    border: 1px solid var(--overlay-9th-color);
 
     .search-icon {
         width: 32px;
@@ -35,7 +35,7 @@
     input,
     .search-clear {
         background-color: transparent;
-        color: var(--search-color);
+        color: var(--text-2nd-color);
     }
 
     input {
@@ -64,12 +64,12 @@
     }
 
     &:focus-within {
-        border-color: var(--search-border-hover-color);
+        border-color: var(--text-3rd-color);
     }
 
     &:hover,
     &:has(input:not(:placeholder-shown)) {
-        border-color: var(--search-color);
+        border-color: var(--text-3rd-color);
         .search-icon {
             opacity: 1;
         }

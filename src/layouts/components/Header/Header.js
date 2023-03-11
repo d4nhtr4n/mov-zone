@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+import {
+    faCaretDown,
+    faPlus,
+    faRightFromBracket,
+} from "@fortawesome/free-solid-svg-icons";
 import classNames from "classnames/bind";
 
 import DropdownMenu from "~/components/DropdownMenu";
@@ -19,11 +23,11 @@ function Header() {
     const [user, setUser] = useState();
     const authToken = localStorage.getItem("auth_token");
 
-    const userMenuItems = [
+    let userMenuItems = [
         {
             leftIcon: <FontAwesomeIcon icon={faPlus} />,
             name: "New account",
-            to: "./register",
+            to: "/register",
         },
         {
             leftIcon: <FontAwesomeIcon icon={faRightFromBracket} />,
@@ -34,6 +38,13 @@ function Header() {
             },
         },
     ];
+
+    if (user && user.name) {
+        userMenuItems = [
+            { name: user.name, to: "/", breakPoint: true },
+            ...userMenuItems,
+        ];
+    }
 
     useEffect(() => {
         if (!authToken) return;
@@ -67,11 +78,18 @@ function Header() {
                                 items={userMenuItems}
                                 onChange={handleDropDownMenuChange}
                             >
-                                <Image
-                                    src="https://yt3.googleusercontent.com/ytc/AL5GRJWiZDd3rzTx6xkZ31_2D9_R7v-r82D2ssf51cgP=s900-c-k-c0x00ffffff-no-rj"
-                                    className={cx("user-avatar")}
-                                    alt=""
-                                />
+                                <div className={cx("user-info")}>
+                                    <Image
+                                        src={
+                                            user.avatar || images.defaultAvatar
+                                        }
+                                        className={cx("user-avatar")}
+                                        alt=""
+                                    />
+                                    <span>
+                                        <FontAwesomeIcon icon={faCaretDown} />
+                                    </span>
+                                </div>
                             </DropdownMenu>
                         </div>
                     ) : (

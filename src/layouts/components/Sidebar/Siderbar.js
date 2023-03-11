@@ -49,12 +49,12 @@ const MENU = [
     //     to: config.routes.ranking,
     //     activePaths: [config.routes.ranking],
     // },
-    {
-        title: "Setting",
-        icon: <FontAwesomeIcon icon={faGear} />,
-        to: config.routes.setting,
-        activePaths: [config.routes.setting],
-    },
+    // {
+    //     title: "Setting",
+    //     icon: <FontAwesomeIcon icon={faGear} />,
+    //     to: config.routes.setting,
+    //     activePaths: [config.routes.setting],
+    // },
 ];
 
 function Sidebar() {

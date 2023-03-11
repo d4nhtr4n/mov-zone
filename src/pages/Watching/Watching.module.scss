@@ -18,6 +18,7 @@
     .detail-button {
         display: flex;
         justify-content: flex-end;
+        margin-bottom: 8px;
     }
 
     .name {
@@ -31,7 +32,7 @@
     }
 
     .genres {
-        margin-top: 12px;
+        margin-top: 16px;
         font-size: var(--text-h6);
         font-weight: 400;
         color: var(--text-2nd-color);

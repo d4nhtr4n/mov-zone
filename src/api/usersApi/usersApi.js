@@ -1,3 +1,4 @@
+import { category } from "../constant";
 import axiosClient from "./axiosClient";
 
 const usersApi = {
@@ -28,13 +29,39 @@ const usersApi = {
             password,
         });
     },
-
     getMyProfile: (token) => {
         const url = `/api/myProfile/getProfile`;
         return axiosClient(token).get(url);
     },
-    getMovieList: (token) => {
-        const url = `/api/myList/getList/movie`;
+    getFollowList: (token, cate) => {
+        let url;
+        if (cate === category.movie) url = `/api/myList/getList/movie`;
+        else if (cate === category.tv) url = `/api/myList/getList/series`;
+        return axiosClient(token).get(url);
+    },
+    addFollowItem: (token, cate, id) => {
+        let url;
+        if (cate === category.movie) url = `/api/myList/addListItem/movie`;
+        else if (cate === category.tv) url = `/api/myList/addListItem/series`;
+        return axiosClient(token).put(url, {
+            id,
+        });
+    },
+    removeFollowItem: (token, cate, id) => {
+        let url;
+        if (cate === category.movie) url = `/api/myList/deleteListItem/movie`;
+        else if (cate === category.tv)
+            url = `/api/myList/deleteListItem/series`;
+        return axiosClient(token).put(url, {
+            id,
+        });
+    },
+    checkFollowItem: (token, cate, id) => {
+        let url;
+        if (cate === category.movie)
+            url = `/api/myList/checkListItem/movie/${id}`;
+        else if (cate === category.tv)
+            url = `/api/myList/checkListItem/series/${id}`;
         return axiosClient(token).get(url);
     },
 };

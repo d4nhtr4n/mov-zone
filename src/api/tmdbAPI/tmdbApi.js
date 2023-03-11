@@ -1,5 +1,5 @@
 import axiosClient from "./axiosClient";
-import { category, movieType, tvType } from "./constant";
+import { category } from "../constant";
 
 const tmdbApi = {
     getTrendingList: (category, params) => {
@@ -20,14 +20,6 @@ const tmdbApi = {
     },
     getOnTheAirTVs: (params) => {
         const url = `/tv/on_the_air`;
-        return axiosClient.get(url, params);
-    },
-    getMoviesList: (type, params) => {
-        const url = `movie/${movieType[type]}`;
-        return axiosClient.get(url, params);
-    },
-    getTvList: (type, params) => {
-        const url = `tv/${tvType[type]}`;
         return axiosClient.get(url, params);
     },
     getVideos: (cate, id) => {

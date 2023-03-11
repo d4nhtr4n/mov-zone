@@ -1,11 +1,12 @@
-import { faBookmark, faPlay } from "@fortawesome/free-solid-svg-icons";
+import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classNames from "classnames/bind";
 import { useEffect, useState } from "react";
 
 import { tmdbApi } from "~/api";
-import { category } from "~/api/tmdbApi/constant";
+import { category } from "~/api/constant";
 import Button from "../Button";
+import FollowButton from "../FollowButton";
 import Image from "../Image";
 
 import style from "./ViewingHeading.module.scss";
@@ -28,7 +29,8 @@ function ViewingHeading({ data }) {
     useEffect(() => {
         if (
             data.media_type === category.movie &&
-            Date.now() - Date.parse(data.release_date) < 0
+            (!data.release_date || Date.now() - Date.parse(data.release_date)) <
+                0
         ) {
             setDisableWatching(true);
         } else setDisableWatching(false);
@@ -56,51 +58,58 @@ function ViewingHeading({ data }) {
                             {data.tagline && (
                                 <q className={cx("tag-line")}>{data.tagline}</q>
                             )}
-                            <ul className={cx("genre-list")}>
-                                {data.genres.map((genre, index) => (
-                                    <li key={index}>{genre.name}</li>
-                                ))}
-                            </ul>
-                            {data.production_countries.length > 0 && (
-                                <p className={cx("countries")}>
-                                    {data.production_countries
-                                        .map((country) => country.name)
-                                        .join(", ")}
-                                </p>
-                            )}
-                            <div>
-                                <div className={cx("rating")}>
-                                    <div
-                                        className={cx("rating-fill")}
-                                        style={{
-                                            width: `${data.vote_average * 10}%`,
-                                        }}
-                                    >
-                                        <span>★★★★★</span>
-                                    </div>
-                                    <div className={cx("rating-empty")}>
-                                        <span>☆☆☆☆☆</span>
+                            <div className={cx("bottom")}>
+                                <div className={cx("info-list")}>
+                                    <ul className={cx("genre-list")}>
+                                        {data.genres.map((genre, index) => (
+                                            <li key={index}>{genre.name}</li>
+                                        ))}
+                                    </ul>
+                                    {data.production_countries.length > 0 && (
+                                        <p className={cx("countries")}>
+                                            {data.production_countries
+                                                .map((country) => country.name)
+                                                .join(", ")}
+                                        </p>
+                                    )}
+                                    <div>
+                                        <div className={cx("rating")}>
+                                            <div
+                                                className={cx("rating-fill")}
+                                                style={{
+                                                    width: `${
+                                                        data.vote_average * 10
+                                                    }%`,
+                                                }}
+                                            >
+                                                <span>★★★★★</span>
+                                            </div>
+                                            <div className={cx("rating-empty")}>
+                                                <span>☆☆☆☆☆</span>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
+                                <div className={cx("actions")}>
+                                    <div>
+                                        <Button
+                                            to={handleWatchUrl()}
+                                            className={cx("button")}
+                                            primary
+                                            disabled={disableWatching}
+                                            leftIcon={
+                                                <FontAwesomeIcon
+                                                    icon={faPlay}
+                                                />
+                                            }
+                                        >
+                                            Watch
+                                        </Button>
+                                    </div>
+
+                                    <FollowButton text data={data} />
+                                </div>
                             </div>
-                        </div>
-                        <div className={cx("action")}>
-                            <Button
-                                to={handleWatchUrl()}
-                                className={cx("button")}
-                                primary
-                                disabled={disableWatching}
-                                leftIcon={<FontAwesomeIcon icon={faPlay} />}
-                            >
-                                Watch
-                            </Button>
-                            <Button
-                                className={cx("button")}
-                                outline
-                                leftIcon={<FontAwesomeIcon icon={faBookmark} />}
-                            >
-                                Follow
-                            </Button>
                         </div>
                     </div>
                 </div>

@@ -1,0 +1,101 @@
+.wrapper {
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 2px 4px;
+    transition: all 1s ease;
+    width: 124px;
+    height: 38px;
+
+    &.large {
+        .button {
+            width: 40px;
+            height: 52px;
+            background-size: 40px;
+        }
+
+        &.followed {
+            .button {
+                width: 40px;
+                height: 52px;
+                background-size: 40px;
+            }
+
+            &:hover {
+                .button {
+                    width: 40px;
+                    height: 52px;
+                    background-size: 40px;
+                }
+            }
+        }
+    }
+
+    &.followed {
+        .text {
+            font-weight: 700;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .button {
+            background: url("/assets/images/bookmark-yes.svg") no-repeat;
+            width: 30px;
+            height: 39px;
+            background-size: 30px;
+            animation: none;
+        }
+
+        &:hover {
+            .button {
+                background: url("/assets/images/bookmark-remove.svg") no-repeat;
+                width: 30px;
+                height: 39px;
+                background-size: 30px;
+            }
+        }
+    }
+}
+
+.text {
+    margin-left: 4px;
+    flex: 1;
+    font-size: var(--text-h6);
+    font-weight: 700;
+}
+
+@keyframes follow-button-animation {
+    0% {
+        -webkit-transform: rotate(0) scale(1) skew(1deg);
+    }
+    10% {
+        -webkit-transform: rotate(-5deg) scale(1) skew(1deg);
+    }
+    20% {
+        -webkit-transform: rotate(5deg) scale(1) skew(1deg);
+    }
+    30% {
+        -webkit-transform: rotate(-5deg) scale(1) skew(1deg);
+    }
+    40% {
+        -webkit-transform: rotate(5deg) scale(1) skew(1deg);
+    }
+    50% {
+        -webkit-transform: rotate(0) scale(1) skew(1deg);
+    }
+    100% {
+        -webkit-transform: rotate(0) scale(1) skew(1deg);
+    }
+}
+
+.button {
+    cursor: pointer;
+    background: url("/assets/images/bookmark-add.svg") no-repeat;
+    width: 30px;
+    height: 39px;
+    background-size: 30px;
+    animation: follow-button-animation 1.8s infinite ease-in-out;
+}

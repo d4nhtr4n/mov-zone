@@ -71,7 +71,7 @@ function DropdownMenu({
         <div>
             <Tippy
                 interactive
-                offset={[10, 20]}
+                offset={[10, 8]}
                 delay={[0, 500]}
                 placement="bottom-end"
                 hideOnClick={hideOnClick}

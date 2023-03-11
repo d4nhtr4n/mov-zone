@@ -1,9 +1,6 @@
+import { category } from "../constant";
+
 const baseUrl = "https://www.2embed.to/embed/tmdb";
-const category = {
-    movie: "movie",
-    tv: "tv",
-    all: "all",
-};
 
 const videoApi = {
     getVideo: (type, id, season, episode) => {

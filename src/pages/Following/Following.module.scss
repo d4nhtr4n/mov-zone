@@ -1,0 +1,21 @@
+.wrapper {
+    margin-top: 44px;
+}
+
+.heading {
+    display: flex;
+    justify-content: space-between;
+
+    .title {
+        font-size: var(--text-h4);
+        font-weight: 600;
+        background: var(--primary-gradient);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+}
+
+.content {
+    padding: 0 44px;
+}

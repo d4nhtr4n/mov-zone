@@ -8,7 +8,7 @@ import Image from "../Image";
 
 import style from "./BackdropSlider.module.scss";
 import { useLocalGenres } from "~/hooks";
-import { category } from "~/api/tmdbApi/constant";
+import { category } from "~/api/constant";
 import { useEffect, useState } from "react";
 
 const cx = classNames.bind(style);

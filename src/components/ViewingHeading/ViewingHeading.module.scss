@@ -100,11 +100,19 @@
             color: var(--text-3rd-color);
         }
 
+        .bottom {
+            margin: 40px 0 8px;
+            display: flex;
+        }
+
+        .info-list {
+            flex: 1;
+        }
+
         .genre-list {
             display: flex;
-            margin: 40px 0 8px;
+            margin-bottom: 8px;
             line-height: 100%;
-
             li {
                 padding-right: 8px;
                 margin: 0;
@@ -146,9 +154,9 @@
         color: var(--text-3rd-color);
     }
 
-    .action {
+    .actions {
         display: flex;
-        flex-direction: column;
+        align-self: end;
         justify-content: flex-end;
 
         @include Tablet() {
@@ -156,7 +164,7 @@
         }
 
         .button {
-            margin: 0;
+            margin: 0 16px 0 0;
             justify-content: flex-start;
 
             & + .button {

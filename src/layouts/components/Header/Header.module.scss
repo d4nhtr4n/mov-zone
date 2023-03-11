@@ -27,6 +27,15 @@
     align-items: center;
 }
 
+.user-info {
+    cursor: pointer;
+    span {
+        font-size: var(--text-h7);
+        color: var(--text-3rd-color);
+        margin-left: 2px;
+    }
+}
+
 .user-notify {
     width: 36px;
     height: 36px;
@@ -45,8 +54,9 @@
 .user-avatar {
     width: 40px;
     height: 40px;
+    background-color: var(--overlay-1st-color);
     object-fit: contain;
     border-radius: 50%;
     cursor: pointer;
-    margin-left: 16px;
+    margin-right: 2px;
 }
