@@ -1,6 +1,6 @@
 import classNames from "classnames/bind";
 import { useEffect, useState } from "react";
-import { tmdbApi } from "~/api";
+import tmdbApi from "~/api/tmdbApi";
 import { category } from "~/api/constant";
 
 import style from "./Details.module.scss";

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import classNames from "classnames/bind";
 
-import { tmdbApi } from "~/api";
+import tmdbApi from "~/api/tmdbApi";
 import Image from "~/components/Image";
 import style from "./SearchResult.module.scss";
 import { useLocalGenres } from "~/hooks";

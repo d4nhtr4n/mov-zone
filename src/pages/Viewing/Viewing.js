@@ -5,7 +5,7 @@ import { Container } from "react-bootstrap";
 
 import ViewingHeading from "~/components/ViewingHeading";
 import ViewingInfo from "~/components/ViewingInfo";
-import { tmdbApi } from "~/api";
+import tmdbApi from "~/api/tmdbApi";
 import style from "./Viewing.module.scss";
 import ViewingTracker from "~/components/ViewingTracker";
 

@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleInfo, faPlay } from "@fortawesome/free-solid-svg-icons";
 
-import { tmdbApi } from "~/api";
+import tmdbApi from "~/api/tmdbApi";
 import classNames from "classnames/bind";
 import Button from "../Button";
 import Image from "../Image";

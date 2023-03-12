@@ -7,12 +7,12 @@ import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import classNames from "classnames/bind";
 
-import { tmdbApi } from "~/api";
 import { category } from "~/api/constant";
 import BackdropSliderItem from "./BackdropSliderItem";
 import "./CustomSwiper.scss";
 import style from "./BackdropSlider.module.scss";
 import Image from "../Image";
+import tmdbApi from "~/api/tmdbApi";
 
 const cx = classNames.bind(style);
 

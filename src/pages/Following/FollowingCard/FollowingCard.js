@@ -6,7 +6,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classNames from "classnames/bind";
 import { useEffect, useState } from "react";
-import { tmdbApi } from "~/api";
+import tmdbApi from "~/api/tmdbApi";
 import { category } from "~/api/constant";
 
 import Button from "~/components/Button";

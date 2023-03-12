@@ -11,7 +11,7 @@ import { Grid, Navigation } from "swiper";
 import "swiper/css/grid";
 import "swiper/css/navigation";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { tmdbApi } from "~/api";
+import tmdbApi from "~/api/tmdbApi";
 import images from "~/assets/images";
 import Button from "../Button";
 import FallBack from "../FallBack";

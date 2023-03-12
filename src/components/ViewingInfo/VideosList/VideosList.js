@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 
 import ReactPlayer from "react-player";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { tmdbApi } from "~/api";
+import tmdbApi from "~/api/tmdbApi";
 import images from "~/assets/images";
 import Button from "~/components/Button";
 import FallBack from "~/components/FallBack";

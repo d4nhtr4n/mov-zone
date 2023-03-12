@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import { tmdbApi } from "~/api";
+import tmdbApi from "~/api/tmdbApi";
 import PosterCard from "~/components/PosterCard";
 import FilterController from "./FilterController";
 

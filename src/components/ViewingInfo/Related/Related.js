@@ -1,6 +1,6 @@
 import React, { Suspense, useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { tmdbApi } from "~/api";
+import tmdbApi from "~/api/tmdbApi";
 import Image from "~/components/Image";
 import PosterCard from "~/components/PosterCard";
 

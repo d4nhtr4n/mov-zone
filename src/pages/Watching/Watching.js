@@ -4,7 +4,7 @@ import { Container } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import videoApi from "~/api/videoApi";
 import style from "./Watching.module.scss";
-import { tmdbApi } from "~/api";
+import tmdbApi from "~/api/tmdbApi";
 import Button from "~/components/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {

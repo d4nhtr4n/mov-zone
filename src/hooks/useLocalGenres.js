@@ -1,4 +1,4 @@
-import { tmdbApi } from "~/api";
+import tmdbApi from "~/api/tmdbApi";
 
 function useLocalGenres(cate, genre_ids = []) {
     const storedGenres = localStorage.getItem(`genres_${cate}`);
