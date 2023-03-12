@@ -7,6 +7,7 @@ const images = {
     robot: require("~/assets/images/robot.png"),
     ghosts: require("~/assets/images/ghosts.png"),
     defaultAvatar: require("~/assets/images/default-avatar.png"),
+    notFound: require("~/assets/images/not-found.png"),
 };
 
 export default images;

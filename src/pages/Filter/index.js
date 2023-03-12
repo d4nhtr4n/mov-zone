@@ -1,5 +1,1 @@
-function Filter() {
-    return <h1>Filter Page</h1>;
-}
-
-export default Filter;
+export { default } from "./Filter";

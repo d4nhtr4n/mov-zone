@@ -1,0 +1,30 @@
+.wrapper {
+    margin-top: 16px;
+}
+
+.content {
+    padding: calc(var(--header-height) + 20px) 44px 0;
+}
+
+.pagination-wrapper {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.card {
+    padding-bottom: 15px;
+}
+
+.pagination {
+    display: flex;
+
+    li {
+        padding: 4px;
+        margin: 0 2px;
+        font-weight: 600;
+
+        &.rc-pagination-item-active {
+            color: var(--primary-color) !important;
+        }
+    }
+}
