@@ -49,10 +49,13 @@ function Filter() {
             } else setShow(false);
             setTotalRecord(response.total_results);
             setData(result);
-            setPage(1);
             contentWrapperRef.current.scrollIntoView(true);
         })();
     }, [options, page]);
+
+    useEffect(() => {
+        setPage(1);
+    }, [totalRecord]);
 
     return (
         <Container className={cx("wrapper")}>
@@ -82,7 +85,6 @@ function Filter() {
                                     <CustomPagination
                                         totalRecord={totalRecord}
                                         onChange={handlePaginationChange}
-                                        current={page}
                                     />
                                 </div>
                             </Row>

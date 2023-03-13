@@ -7,7 +7,9 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Pagination from "rc-pagination";
 import "./CustomPagination.scss";
-function CustomPagination({ totalRecord, onChange, current }) {
+import { useState } from "react";
+function CustomPagination({ totalRecord, onChange }) {
+    const [current, setCurrent] = useState(1);
     return (
         <Pagination
             prevIcon={<FontAwesomeIcon icon={faAngleLeft} />}
@@ -23,7 +25,10 @@ function CustomPagination({ totalRecord, onChange, current }) {
             locale={localeInfo}
             pageSize={20}
             total={totalRecord}
-            onChange={onChange}
+            onChange={(current) => {
+                onChange(current);
+                setCurrent(current);
+            }}
         />
     );
 }

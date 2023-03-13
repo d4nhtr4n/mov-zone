@@ -17,7 +17,11 @@ function ViewingHeading({ data }) {
     const [disableWatching, setDisableWatching] = useState(false);
     function handleWatchUrl() {
         let watchUrl = `/watch/${data.media_type}/${data.id}`;
-        if (data && data.media_type === category.tv) {
+        if (
+            data &&
+            data.media_type === category.tv &&
+            data.last_episode_to_air
+        ) {
             watchUrl = watchUrl.concat(
                 "",
                 `/${data.last_episode_to_air.season_number}/${data.last_episode_to_air.episode_number}/`
