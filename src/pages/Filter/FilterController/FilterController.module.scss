@@ -1,14 +1,10 @@
 $unactive-color: var(--overlay-4th-color);
+@import "bootstrap/scss/mixins/breakpoints";
+@import "src/styles/variables";
 
 .wrapper {
     padding: 44px;
     background: var(--overlay-1st-color);
-    // background: radial-gradient(
-    //     55% 180% at 5% 100%,
-    //     var(--primary-color) 0,
-    //     rgba(10, 10, 10, 0) 75%,
-    //     rgba(10, 10, 10, 0) 100%
-    // );
     border-radius: 8px;
 
     .heading {
@@ -28,6 +24,11 @@ $unactive-color: var(--overlay-4th-color);
     display: flex;
     align-items: flex-end;
     margin-bottom: 4px;
+
+    @include media-breakpoint-down(sm) {
+        flex-direction: column;
+        align-items: flex-start;
+    }
 
     .title {
         margin-bottom: 6px;

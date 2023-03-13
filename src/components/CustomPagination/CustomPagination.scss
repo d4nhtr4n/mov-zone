@@ -1,3 +1,6 @@
+@import "bootstrap/scss/mixins/breakpoints";
+@import "src/styles/variables";
+
 .rc-pagination {
     display: flex;
     align-items: center;
@@ -17,11 +20,18 @@
     user-select: none;
     min-width: 28px;
     min-height: 28px;
+
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 4px;
     border: 1.5px solid transparent;
+
+    @include media-breakpoint-down(sm) {
+        min-width: 16px;
+        min-height: 16px;
+    }
+
     &:hover {
         background-color: var(--overlay-1st-color);
     }
@@ -41,6 +51,11 @@
 
 .rc-pagination-options-quick-jumper {
     padding: 4px 8px;
+
+    @include media-breakpoint-down(md) {
+        display: none;
+    }
+
     input {
         margin: 0 4px;
         width: 40px;

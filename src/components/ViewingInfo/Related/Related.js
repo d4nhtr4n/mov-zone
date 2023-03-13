@@ -84,12 +84,14 @@ function Related({ data }) {
                 >
                     <div className={cx("collection-inner")}>
                         <div className={cx("collection-info")}>
-                            <Image
-                                className={cx("collection-poster")}
-                                src={tmdbApi.getW200Image(
-                                    collection.poster_path
-                                )}
-                            />
+                            <div>
+                                <Image
+                                    className={cx("collection-poster")}
+                                    src={tmdbApi.getW200Image(
+                                        collection.poster_path
+                                    )}
+                                />
+                            </div>
                             <div className={cx("collection-detail")}>
                                 <h1>{collection.name}</h1>
                                 <p>{collection.overview}</p>
@@ -106,11 +108,11 @@ function Related({ data }) {
                                     spaceBetween: 12,
                                 },
                                 576: {
-                                    slidesPerView: 3.5,
+                                    slidesPerView: 2.5,
                                     spaceBetween: 18,
                                 },
-                                768: {
-                                    slidesPerView: 4.5,
+                                992: {
+                                    slidesPerView: 3.5,
                                     spaceBetween: 24,
                                 },
                             }}

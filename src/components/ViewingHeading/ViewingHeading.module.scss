@@ -1,9 +1,18 @@
+@import "bootstrap/scss/mixins/breakpoints";
+@import "src/styles/variables";
 @import "/src/styles/mixins";
 .wrapper {
-    margin-top: 16px;
     width: 100%;
     position: relative;
     margin-bottom: 10%;
+
+    @include media-breakpoint-down(lg) {
+        margin-bottom: 10%;
+    }
+
+    @include media-breakpoint-down(sm) {
+        margin-bottom: 110%;
+    }
 }
 
 .background {
@@ -27,17 +36,13 @@
     display: flex;
     justify-content: center;
 
-    @include Tablet() {
-        top: 60%;
+    @include media-breakpoint-down(lg) {
+        top: 100%;
     }
 
-    @include Mobile() {
+    @include media-breakpoint-down(sm) {
+        top: 180%;
         flex-direction: column;
-        position: relative;
-        top: -120px;
-        text-align: center;
-        left: 50%;
-        transform: translateX(-50%);
     }
 }
 
@@ -47,8 +52,16 @@
     width: 100%;
     max-width: 1600px;
 
-    @include Tablet() {
-        align-items: flex-start;
+    @include media-breakpoint-down(lg) {
+        // flex-direction: column;
+        // align-items: center;
+        // text-align: center;
+    }
+
+    @include media-breakpoint-down(sm) {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
     }
 
     .poster {
@@ -56,26 +69,32 @@
         min-width: 160px;
         border-radius: 8px;
         filter: drop-shadow(0 0 10px var(--bg-color));
+
+        @include media-breakpoint-down(lg) {
+            width: 20%;
+        }
+
+        @include media-breakpoint-down(sm) {
+            width: 60%;
+        }
     }
 
     .content {
         display: flex;
-        flex-direction: row;
         position: relative;
         bottom: 0;
         margin-left: 16px;
         justify-content: center;
         flex: 1;
 
-        @include Tablet() {
-            flex-direction: column;
-        }
-    }
-
-    .info {
         display: flex;
         flex-direction: column;
         flex: 1;
+
+        @include media-breakpoint-down(sm) {
+            margin-top: 12px;
+            margin-left: 0;
+        }
 
         .name {
             font-size: var(--text-h3);
@@ -100,9 +119,14 @@
             color: var(--text-3rd-color);
         }
 
-        .bottom {
+        .info {
             margin: 40px 0 8px;
             display: flex;
+
+            @include media-breakpoint-down(lg) {
+                flex-direction: column;
+                margin: 20px 0 8px;
+            }
         }
 
         .info-list {
@@ -113,6 +137,11 @@
             display: flex;
             margin-bottom: 8px;
             line-height: 100%;
+
+            @include media-breakpoint-down(sm) {
+                justify-content: center;
+            }
+
             li {
                 padding-right: 8px;
                 margin: 0;
@@ -158,42 +187,21 @@
         display: flex;
         align-self: end;
         justify-content: flex-end;
+        align-items: center;
 
-        @include Tablet() {
-            flex-direction: row;
+        @include media-breakpoint-down(lg) {
+            margin-top: 12px;
+        }
+
+        @include media-breakpoint-down(sm) {
+            width: 100%;
+            justify-content: center;
+            align-items: center;
         }
 
         .button {
             margin: 0 16px 0 0;
             justify-content: flex-start;
-
-            & + .button {
-                margin-top: 8px;
-
-                @include Tablet() {
-                    margin-top: 0;
-                    margin-left: 8px;
-                }
-            }
-        }
-    }
-
-    @include Tablet() {
-        $left: 5%;
-        bottom: -20%;
-        .poster {
-            width: 30%;
-        }
-    }
-
-    @include Mobile() {
-        .poster {
-            width: 30%;
-            bottom: 0;
-        }
-        .info {
-            display: flex;
-            position: relative;
         }
     }
 }
@@ -206,7 +214,8 @@
     height: 50%;
     z-index: 2;
     background: linear-gradient(to top, var(--bg-color), transparent);
-    @include Mobile() {
-        display: none;
+
+    @include media-breakpoint-down(lg) {
+        height: 100%;
     }
 }

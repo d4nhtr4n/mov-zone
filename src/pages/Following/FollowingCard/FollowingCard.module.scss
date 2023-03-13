@@ -1,3 +1,6 @@
+@import "bootstrap/scss/mixins/breakpoints";
+@import "src/styles/variables";
+
 .wrapper {
     border-radius: 8px;
     overflow: hidden;
@@ -9,6 +12,10 @@
     display: flex;
     padding: 16px;
     background-color: rgba($color: #000000, $alpha: 0.8);
+
+    @include media-breakpoint-down(sm) {
+        flex-direction: column;
+    }
 }
 
 .poster {
@@ -21,6 +28,12 @@
     justify-content: space-between;
     padding-bottom: 8px;
     border-bottom: 1px solid var(--overlay-6th-color);
+
+    @include media-breakpoint-down(lg) {
+        display: flex;
+        flex-direction: column;
+    }
+
     .name {
         font-size: var(--text-h5);
         font-weight: 700;
@@ -33,6 +46,13 @@
         margin-left: 8px;
         display: flex;
         align-items: center;
+
+        @include media-breakpoint-down(lg) {
+            align-self: flex-end;
+            margin-left: 0;
+            margin-top: 8px;
+        }
+
         .remove-btn {
             margin-left: 8px;
             width: 28px;
@@ -55,6 +75,11 @@
 .info {
     flex: 1;
     margin-left: 16px;
+
+    @include media-breakpoint-down(sm) {
+        margin-left: 0;
+        margin-top: 16px;
+    }
 }
 
 .details {
@@ -62,9 +87,18 @@
     margin-top: 8px;
     font-size: var(--text-h6);
 
+    @include media-breakpoint-down(sm) {
+        flex-direction: column;
+    }
+
     .info-list {
         flex: 1;
         padding-right: 8px;
+
+        @include media-breakpoint-down(lg) {
+            flex: 6;
+        }
+
         li {
             display: flex;
             & + li {
@@ -75,6 +109,10 @@
                 display: inline-block;
                 width: 30%;
                 font-weight: 400;
+
+                @include media-breakpoint-down(sm) {
+                    width: 35%;
+                }
             }
 
             .content {
@@ -90,6 +128,14 @@
         padding-left: 8px;
         margin: 0;
         font-size: var(--text-h6);
+
+        @include media-breakpoint-down(lg) {
+            flex: 4;
+        }
+
+        @include media-breakpoint-down(sm) {
+            display: none;
+        }
 
         .title {
             width: 30%;

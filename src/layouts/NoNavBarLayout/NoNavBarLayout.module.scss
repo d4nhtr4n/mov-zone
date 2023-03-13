@@ -14,15 +14,6 @@
 
 .content {
     flex: 1;
-    padding: 0;
     overflow: hidden;
-    padding-top: 16px;
-
-    @include Tablet() {
-        padding: 0 20px 0 20px;
-    }
-
-    @include Mobile() {
-        padding: 0 12px 0 12px;
-    }
+    padding-top: 20px;
 }

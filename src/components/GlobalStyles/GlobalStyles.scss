@@ -1,7 +1,7 @@
 @import "normalize.css";
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600;700;800;900&display=swap");
-@import "/src/styles/mixins";
-
+@import "bootstrap/scss/mixins/breakpoints";
+@import "src/styles/variables";
 :root {
     // Dimens
     --app-horizontal-padding: 28px;
@@ -15,6 +15,17 @@
     --text-h6: 1.6rem;
     --text-h7: 1.28rem;
     --text-h8: 1rem;
+
+    @include media-breakpoint-down(md) {
+        --text-h1: 3.906rem;
+        --text-h2: 3.125rem;
+        --text-h3: 2.5rem;
+        --text-h4: 2rem;
+        --text-h5: 1.6rem;
+        --text-h6: 1.28rem;
+        --text-h7: 1rem;
+        --text-h8: 0.8rem;
+    }
 
     // Colors
     --white-color: #fff;

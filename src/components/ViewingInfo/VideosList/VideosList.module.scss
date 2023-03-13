@@ -1,3 +1,6 @@
+@import "bootstrap/scss/mixins/breakpoints";
+@import "src/styles/variables";
+
 .thumb-img-wrapper {
     position: relative;
 
@@ -58,6 +61,14 @@
 
 .react-player-container {
     padding: calc(var(--header-height) + 8px) 80px 0;
+
+    @include media-breakpoint-down(lg) {
+        padding: calc(var(--header-height) + 8px) 40px 0;
+    }
+
+    @include media-breakpoint-down(md) {
+        padding: calc(var(--header-height) + 8px) 0px 0;
+    }
 }
 
 .react-player-wrapper {

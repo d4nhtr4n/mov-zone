@@ -1,6 +1,17 @@
+@import "bootstrap/scss/mixins/breakpoints";
+@import "src/styles/variables";
+
 .btab-custom {
     display: block;
     width: 100%;
+
+    .nav {
+        @include media-breakpoint-down(sm) {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+    }
 
     .nav-link {
         font-size: var(--text-h5);

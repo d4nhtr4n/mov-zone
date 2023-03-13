@@ -1,3 +1,6 @@
+@import "bootstrap/scss/mixins/breakpoints";
+@import "src/styles/variables";
+
 .wrapper {
     padding: 40px;
 
@@ -14,6 +17,10 @@
     margin-right: 24px;
     width: 290px;
     border-right: 1px solid var(--overlay-1st-color);
+
+    @include media-breakpoint-down(md) {
+        display: none;
+    }
 
     .logo {
         max-width: 180px;
@@ -46,6 +53,14 @@
 .control {
     width: 310px;
     padding: 12px 0;
+
+    @include media-breakpoint-down(md) {
+        padding: 0;
+    }
+
+    @include media-breakpoint-down(sm) {
+        width: 220px;
+    }
 
     .heading {
         font-size: var(--text-h3);

@@ -67,13 +67,25 @@ function Footer() {
                         <Col lg={{ span: 7, offset: 1 }} md={8} sm={12}>
                             <Container fluid>
                                 <Row>
-                                    <Col sm={4} xs={12}>
+                                    <Col
+                                        className={cx("link-group")}
+                                        sm={4}
+                                        xs={12}
+                                    >
                                         <InfoList data={USEFULL_LINKS} />
                                     </Col>
-                                    <Col sm={4} xs={12}>
+                                    <Col
+                                        className={cx("link-group")}
+                                        sm={4}
+                                        xs={12}
+                                    >
                                         <InfoList data={COMPANY_LINKS} />
                                     </Col>
-                                    <Col sm={4} xs={12}>
+                                    <Col
+                                        className={cx("link-group")}
+                                        sm={4}
+                                        xs={12}
+                                    >
                                         <InfoList data={LEGAL_LINKS} />
                                     </Col>
                                 </Row>

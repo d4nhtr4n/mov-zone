@@ -65,7 +65,7 @@ function BackdropSlider() {
                         onResize={(swiper) => {
                             // Set vertical thumbs swiper height equal to main swiper height
                             let newHeight;
-                            if (window.innerWidth >= 768) {
+                            if (window.innerWidth >= 992) {
                                 newHeight = swiper.height;
                                 setNavSliderHeight(`${newHeight}px`);
                             } else {
@@ -95,7 +95,6 @@ function BackdropSlider() {
                         onSwiper={(swiper) => {
                             setImagesNavSlider(swiper);
                         }}
-                        direction="vertical"
                         loop={true}
                         loopedSlides={10}
                         spaceBetween={12}
@@ -106,7 +105,7 @@ function BackdropSlider() {
                             0: {
                                 direction: "horizontal",
                             },
-                            768: {
+                            992: {
                                 direction: "vertical",
                             },
                         }}

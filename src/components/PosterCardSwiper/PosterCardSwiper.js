@@ -81,11 +81,16 @@ function PosterCardSwiper({ data, extendable = true }) {
                         slidesPerGroup: 1,
                     },
                     576: {
-                        slidesPerView: 4,
-                        spaceBetween: 18,
-                        slidesPerGroup: 4,
+                        slidesPerView: 2.5,
+                        spaceBetween: 12,
+                        slidesPerGroup: 2,
                     },
                     768: {
+                        slidesPerView: 3.5,
+                        spaceBetween: 18,
+                        slidesPerGroup: 3,
+                    },
+                    992: {
                         slidesPerView: 5,
                         spaceBetween: 24,
                         slidesPerGroup: 5,

@@ -1,24 +1,49 @@
+@import "bootstrap/scss/mixins/breakpoints";
+@import "src/styles/variables";
+
 .wrapper {
     display: flex;
+
+    @include media-breakpoint-down(lg) {
+        flex-direction: column;
+    }
 }
 
 .video {
     width: 80%;
     aspect-ratio: 16 / 9;
+
+    @include media-breakpoint-down(lg) {
+        width: 100%;
+    }
 }
 
 .info {
     flex: 1;
     margin-left: 16px;
 
+    @include media-breakpoint-down(lg) {
+        width: 100%;
+        margin-left: 0;
+    }
+
     .heading {
         margin: 16px 0 28px;
+        position: relative;
     }
 
     .detail-button {
         display: flex;
         justify-content: flex-end;
         margin-bottom: 8px;
+    }
+
+    .follow-btn-wrapper {
+        @include media-breakpoint-down(lg) {
+            margin-top: 12px;
+            display: flex;
+            justify-content: flex-end;
+        }
     }
 
     .name {

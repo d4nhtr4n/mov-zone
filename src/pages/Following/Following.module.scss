@@ -1,3 +1,6 @@
+@import "bootstrap/scss/mixins/breakpoints";
+@import "src/styles/variables";
+
 .wrapper {
     margin-top: 44px;
 }
@@ -18,4 +21,8 @@
 
 .content {
     padding: 0 44px;
+
+    @include media-breakpoint-down(lg) {
+        padding: 0;
+    }
 }

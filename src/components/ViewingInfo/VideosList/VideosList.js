@@ -45,14 +45,18 @@ function VideosList({ data }) {
                 direction="horizontal"
                 breakpoints={{
                     0: {
-                        slidesPerView: 1.5,
+                        slidesPerView: 2.5,
                         spaceBetween: 8,
                     },
                     576: {
-                        slidesPerView: 4.5,
+                        slidesPerView: 3.5,
                         spaceBetween: 12,
                     },
                     768: {
+                        slidesPerView: 4.5,
+                        spaceBetween: 16,
+                    },
+                    992: {
                         slidesPerView: 5.5,
                         spaceBetween: 16,
                     },

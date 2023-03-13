@@ -68,7 +68,10 @@ function Filter() {
                                 {data.map((item, index) => (
                                     <Col
                                         key={index}
-                                        md={2}
+                                        xl={2}
+                                        lg={3}
+                                        md={4}
+                                        sm={6}
                                         className={cx("card")}
                                     >
                                         <PosterCard

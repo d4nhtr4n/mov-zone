@@ -113,7 +113,7 @@ function Details({ data }) {
                             target="_blank"
                             rel="noreferrer"
                         >
-                            {data.homepage}
+                            Click
                         </a>
                     </li>
                 )}

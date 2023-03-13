@@ -1,3 +1,6 @@
+@import "bootstrap/scss/mixins/breakpoints";
+@import "src/styles/variables";
+
 $gradient: linear-gradient(90deg, #6603a0 0%, #2aeefa 50%, #6603a0 100%);
 
 .wrapper {
@@ -35,19 +38,10 @@ $gradient: linear-gradient(90deg, #6603a0 0%, #2aeefa 50%, #6603a0 100%);
     display: inline-block;
     width: 24px;
     text-align: left;
+    @include media-breakpoint-down(sm) {
+        width: 12px;
+    }
 }
-
-// Button types
-// .rounded {
-//     border-radius: 999px;
-//     box-shadow: 0 2px 8px rgba(42, 238, 250 , 0.2);;
-//     border-color: rgba(42, 238, 250 , 0.12);
-
-//     &:hover {
-//         border-color: rgba(22, 24, 35, 0.2);
-//         background-color: rgba(22, 24, 35, 0.03);
-//     }
-// }
 
 .primary {
     color: var(--white);
@@ -91,12 +85,21 @@ $gradient: linear-gradient(90deg, #6603a0 0%, #2aeefa 50%, #6603a0 100%);
     font-weight: 500;
     min-width: 88px;
     padding: 4px 16px;
-
     width: 16px;
+
+    @include media-breakpoint-down(md) {
+        min-width: 66px;
+        padding: 4px 8px;
+    }
 }
 
 .large {
     font-size: var(--text-h5);
     padding: 10px 16px;
     min-width: 140px;
+
+    @include media-breakpoint-down(sm) {
+        min-width: 90px;
+        padding: 6px 10px;
+    }
 }

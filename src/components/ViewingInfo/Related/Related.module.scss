@@ -1,3 +1,6 @@
+@import "bootstrap/scss/mixins/breakpoints";
+@import "src/styles/variables";
+
 .collection-wrapper {
     border-radius: 8px;
     overflow: hidden;
@@ -11,15 +14,23 @@
 
 .collection-info {
     display: flex;
-
     margin-bottom: 32px;
+
+    @include media-breakpoint-down(sm) {
+        flex-direction: column;
+        align-items: center;
+    }
 }
 
 .collection-poster {
     width: 120px;
-    max-height: calc(120px * 1.5);
     aspect-ratio: 1/1.5;
     border-radius: 6px;
+
+    @include media-breakpoint-down(sm) {
+        width: 200px;
+        margin-bottom: 16px;
+    }
 }
 
 .collection-detail {
@@ -28,6 +39,11 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+
+    @include media-breakpoint-down(sm) {
+        margin-left: 0;
+        text-align: justify;
+    }
 
     h1 {
         font-size: var(--text-h3);

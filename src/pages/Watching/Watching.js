@@ -1,17 +1,13 @@
 import classNames from "classnames/bind";
 import { Suspense, useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import videoApi from "~/api/videoApi";
 import style from "./Watching.module.scss";
 import tmdbApi from "~/api/tmdbApi";
 import Button from "~/components/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-    faArrowLeft,
-    faBookmark,
-    faCircleInfo,
-} from "@fortawesome/free-solid-svg-icons";
+import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 import PosterCardSwiper from "~/components/PosterCardSwiper";
 import PosterCardList from "~/components/PosterCardList";
 import Seasons from "~/components/Seasons";
@@ -21,7 +17,6 @@ import FollowButton from "~/components/FollowButton";
 const cx = classNames.bind(style);
 
 function Watching() {
-    const nav = useNavigate();
     const params = useParams();
     const [videoUrl, setVideoUrl] = useState("");
     const [episodeInfo, setEpisodeInfo] = useState("");
@@ -143,17 +138,6 @@ function Watching() {
                 </div>
 
                 <div className={cx("info")}>
-                    <Button
-                        small
-                        text
-                        onClick={() => {
-                            nav(-1);
-                        }}
-                        leftIcon={<FontAwesomeIcon icon={faArrowLeft} />}
-                    >
-                        Back
-                    </Button>
-
                     {detail && (
                         <>
                             <div className={cx("heading")}>
@@ -180,7 +164,9 @@ function Watching() {
                                         Details
                                     </Button>
                                 </div>
-                                <FollowButton large data={detail} />
+                                <div className={cx("follow-btn-wrapper")}>
+                                    <FollowButton large data={detail} />
+                                </div>
                                 <p className={cx("genres")}>
                                     {`Genres: ${detail.genres
                                         .map((genre) => genre.name)

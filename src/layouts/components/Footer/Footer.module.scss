@@ -1,3 +1,6 @@
+@import "bootstrap/scss/mixins/breakpoints";
+@import "src/styles/variables";
+
 .wrapper {
     width: 100%;
     background-color: var(--footer-bg-color);
@@ -6,6 +9,11 @@
     margin-top: 24px;
     display: flex;
     justify-content: center;
+
+    @include media-breakpoint-down(md) {
+        border-radius: 0;
+        padding: 0 24px;
+    }
 }
 
 .inner {
@@ -14,6 +22,10 @@
 }
 
 .intro {
+    @include media-breakpoint-down(md) {
+        margin-bottom: 24px;
+    }
+
     .logo {
         width: 100%;
         max-width: 270px;
@@ -38,6 +50,7 @@
 .bottom {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .copyright {
@@ -45,6 +58,12 @@
     font-weight: 300;
     .icon {
         margin: 0 12px;
+    }
+}
+
+.link-group {
+    @include media-breakpoint-down(sm) {
+        margin-bottom: 40px;
     }
 }
 

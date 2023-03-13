@@ -55,64 +55,60 @@ function ViewingHeading({ data }) {
                         src={tmdbApi.getW500Image(data.poster_path)}
                     />
                     <div className={cx("content")}>
+                        <span className={cx("name")}>
+                            {data.title || data.name}
+                        </span>
+                        {data.tagline && (
+                            <q className={cx("tag-line")}>{data.tagline}</q>
+                        )}
                         <div className={cx("info")}>
-                            <span className={cx("name")}>
-                                {data.title || data.name}
-                            </span>
-                            {data.tagline && (
-                                <q className={cx("tag-line")}>{data.tagline}</q>
-                            )}
-                            <div className={cx("bottom")}>
-                                <div className={cx("info-list")}>
-                                    <ul className={cx("genre-list")}>
-                                        {data.genres.map((genre, index) => (
-                                            <li key={index}>{genre.name}</li>
-                                        ))}
-                                    </ul>
-                                    {data.production_countries.length > 0 && (
-                                        <p className={cx("countries")}>
-                                            {data.production_countries
-                                                .map((country) => country.name)
-                                                .join(", ")}
-                                        </p>
-                                    )}
-                                    <div>
-                                        <div className={cx("rating")}>
-                                            <div
-                                                className={cx("rating-fill")}
-                                                style={{
-                                                    width: `${
-                                                        data.vote_average * 10
-                                                    }%`,
-                                                }}
-                                            >
-                                                <span>★★★★★</span>
-                                            </div>
-                                            <div className={cx("rating-empty")}>
-                                                <span>☆☆☆☆☆</span>
-                                            </div>
+                            <div className={cx("info-list")}>
+                                <ul className={cx("genre-list")}>
+                                    {data.genres.map((genre, index) => (
+                                        <li key={index}>{genre.name}</li>
+                                    ))}
+                                </ul>
+                                {data.production_countries.length > 0 && (
+                                    <p className={cx("countries")}>
+                                        {data.production_countries
+                                            .map((country) => country.name)
+                                            .join(", ")}
+                                    </p>
+                                )}
+                                <div>
+                                    <div className={cx("rating")}>
+                                        <div
+                                            className={cx("rating-fill")}
+                                            style={{
+                                                width: `${
+                                                    data.vote_average * 10
+                                                }%`,
+                                            }}
+                                        >
+                                            <span>★★★★★</span>
+                                        </div>
+                                        <div className={cx("rating-empty")}>
+                                            <span>☆☆☆☆☆</span>
                                         </div>
                                     </div>
                                 </div>
-                                <div className={cx("actions")}>
-                                    <div>
-                                        <Button
-                                            to={handleWatchUrl()}
-                                            className={cx("button")}
-                                            primary
-                                            disabled={disableWatching}
-                                            leftIcon={
-                                                <FontAwesomeIcon
-                                                    icon={faPlay}
-                                                />
-                                            }
-                                        >
-                                            Watch
-                                        </Button>
-                                    </div>
-
-                                    <FollowButton text data={data} />
+                            </div>
+                            <div className={cx("actions")}>
+                                <div>
+                                    <Button
+                                        to={handleWatchUrl()}
+                                        className={cx("button")}
+                                        primary
+                                        disabled={disableWatching}
+                                        leftIcon={
+                                            <FontAwesomeIcon icon={faPlay} />
+                                        }
+                                    >
+                                        Watch
+                                    </Button>
                                 </div>
+
+                                <FollowButton text data={data} />
                             </div>
                         </div>
                     </div>
