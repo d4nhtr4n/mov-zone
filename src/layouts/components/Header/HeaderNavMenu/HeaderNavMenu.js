@@ -15,7 +15,6 @@ import Image from "~/components/Image";
 const cx = classNames.bind(style);
 
 function HeaderNavMenu({ user, active, handleHide, handleLogout }) {
-    console.log(user, active);
     return (
         <div
             className={cx("mobile-nav-wrapper", {

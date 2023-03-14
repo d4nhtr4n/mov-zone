@@ -15,7 +15,7 @@ import FollowingList from "./FollowingList";
 const cx = classNames.bind(style);
 
 function Following() {
-    const [logedIn, setLogedIn] = useState();
+    const [logedIn, setLogedIn] = useState(true);
     const authToken = localStorage.getItem("auth_token");
     const token = localStorage.getItem("auth_token");
 
@@ -46,11 +46,13 @@ function Following() {
     ];
 
     useEffect(() => {
-        if (!authToken) return;
+        if (!authToken) {
+            setLogedIn(false);
+            return;
+        }
         (async function handleGetIn() {
             try {
                 const response = await usersApi.getMyProfile(authToken);
-                console.log(response);
                 if (response.success) setLogedIn(true);
                 else setLogedIn(false);
             } catch (error) {

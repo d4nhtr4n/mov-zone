@@ -35,7 +35,6 @@ function FollowingList({ data }) {
                     media_type,
                     id
                 );
-                console.log(response);
                 if (response.success) {
                     if (response.data && response.data.length > 0) {
                         setHaveData(true);
