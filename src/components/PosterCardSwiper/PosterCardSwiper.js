@@ -36,14 +36,14 @@ function PosterCardSwiper({ data, extendable = true }) {
                     <div className={cx("title-wrapper")}>
                         <h3 className={cx("title")}>{data.title}</h3>
 
-                        {extendable && (
+                        {/* {extendable && (
                             <div className={cx("more-wrapper")}>
                                 <Link className={cx("more-btn")} to={""}>
                                     <span>See all</span>
                                     <FontAwesomeIcon icon={faAngleRight} />
                                 </Link>
                             </div>
-                        )}
+                        )} */}
                     </div>
                     {data.description && (
                         <h5 className={cx("description")}>

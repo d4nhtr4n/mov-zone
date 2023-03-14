@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+    faBars,
     faCaretDown,
+    faMagnifyingGlass,
     faPlus,
     faRightFromBracket,
+    faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import classNames from "classnames/bind";
 
@@ -16,12 +19,22 @@ import images from "~/assets/images";
 import config from "~/config";
 import style from "./Header.module.scss";
 import usersApi from "~/api/usersApi";
+import HeaderNavMenu from "./HeaderNavMenu";
 
 const cx = classNames.bind(style);
 
 function Header() {
     const [user, setUser] = useState();
     const authToken = localStorage.getItem("auth_token");
+    const [showMobileSearch, setShowMobileSearch] = useState(false);
+    const [showMobileNav, setShowMobileNav] = useState(false);
+
+    const { pathname } = useLocation();
+
+    useEffect(() => {
+        if (showMobileNav === true) setShowMobileNav(false);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [pathname]);
 
     let userMenuItems = [
         {
@@ -65,11 +78,22 @@ function Header() {
     return (
         <header className={cx("wrapper")}>
             <div className={cx("inner")}>
+                <button
+                    className={cx("nav-btn")}
+                    onClick={() => {
+                        setShowMobileNav(true);
+                    }}
+                >
+                    <FontAwesomeIcon icon={faBars} />
+                </button>
+
                 <Link to={config.routes.home} className={cx("logo")}>
                     <img src={images.logoWithText} alt="MovZone" />
                 </Link>
 
-                <SearchBox />
+                <div className={cx("search-box")}>
+                    <SearchBox />
+                </div>
 
                 <div className={cx("user-action")}>
                     {user ? (
@@ -94,16 +118,56 @@ function Header() {
                         </div>
                     ) : (
                         <>
-                            <Button to="/login" outline>
-                                Sign in
-                            </Button>
-                            <Button to="/register" primary>
+                            <Button
+                                className={cx("register-btn")}
+                                to="/register"
+                                outline
+                            >
                                 Sign up
+                            </Button>
+                            <Button
+                                className={cx("login-btn")}
+                                to="/login"
+                                primary
+                            >
+                                Sign in
                             </Button>
                         </>
                     )}
                 </div>
+                <button
+                    className={cx("search-btn")}
+                    onClick={() => setShowMobileSearch(true)}
+                >
+                    <FontAwesomeIcon icon={faMagnifyingGlass} />
+                </button>
+
+                <div
+                    className={cx("mobile-search-wrapper", {
+                        active: showMobileSearch,
+                    })}
+                >
+                    <div
+                        className={cx("search-back")}
+                        onClick={() => {
+                            setShowMobileSearch(false);
+                        }}
+                    >
+                        <FontAwesomeIcon icon={faXmark} />
+                    </div>
+                    <SearchBox />
+                </div>
             </div>
+
+            <HeaderNavMenu
+                user={user}
+                active={showMobileNav}
+                handleHide={() => setShowMobileNav(false)}
+                handleLogout={() => {
+                    setUser(null);
+                    localStorage.removeItem("auth_token");
+                }}
+            />
         </header>
     );
 }

@@ -1,6 +1,17 @@
+@import "bootstrap/scss/mixins/breakpoints";
+@import "src/styles/variables";
+
 .search,
 .search-result {
     width: 420px;
+
+    @include media-breakpoint-down(lg) {
+        width: 320px;
+    }
+
+    @media (max-width: 400px) {
+        width: 250px;
+    }
 }
 
 .search {
@@ -14,8 +25,7 @@
     color: var(--search-color);
     display: flex;
     justify-content: center;
-    border-radius: calc(var(--search-height) / 2);
-    border: 1px solid var(--overlay-9th-color);
+    border-radius: 6px;
 
     .search-icon {
         width: 32px;
@@ -25,6 +35,10 @@
         align-items: center;
         font-size: 18px;
         opacity: 0.7;
+
+        @include media-breakpoint-down(sm) {
+            display: none;
+        }
 
         &:hover {
             opacity: 1;
@@ -57,19 +71,18 @@
         align-items: center;
         visibility: hidden;
 
+        @include media-breakpoint-down(sm) {
+            font-size: 12px;
+        }
+
         &:hover {
             cursor: pointer;
             opacity: 1;
         }
     }
 
-    &:focus-within {
-        border-color: var(--text-3rd-color);
-    }
-
     &:hover,
     &:has(input:not(:placeholder-shown)) {
-        border-color: var(--text-3rd-color);
         .search-icon {
             opacity: 1;
         }
@@ -93,4 +106,9 @@
         font-size: 12px;
         margin-right: 8px;
     }
+}
+
+.search-poper {
+    border-radius: 6px;
+    border: none;
 }

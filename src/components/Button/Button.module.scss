@@ -19,6 +19,11 @@ $gradient: linear-gradient(90deg, #6603a0 0%, #2aeefa 50%, #6603a0 100%);
     user-select: none;
     border: 1px solid transparent;
 
+    @include media-breakpoint-down(sm) {
+        min-width: 70px;
+        padding: 4px 8px;
+    }
+
     + .wrapper {
         margin-left: 8px;
     }

@@ -5,12 +5,20 @@ import style from "./MenuItem.module.scss";
 
 const cx = classNames.bind(style);
 
-function MenuItem({ data }) {
+function MenuItem({ data, mobile = false }) {
     const { pathname } = useLocation();
     const match = data.activePaths.find((path) => matchPath(path, pathname));
     return (
         <NavLink
-            className={(nav) => cx("wrapper", { active: match })}
+            className={(nav) =>
+                cx(
+                    "wrapper",
+                    {
+                        mobile: mobile,
+                    },
+                    { active: match }
+                )
+            }
             to={data.to}
         >
             <div className={cx("icon")}>{data.icon}</div>

@@ -1,0 +1,79 @@
+@import "bootstrap/scss/mixins/breakpoints";
+@import "src/styles/variables";
+
+.mobile-nav-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    transform: translateX(-100%);
+    transition: all 0.2s ease-out;
+    display: none;
+
+    @include media-breakpoint-down(md) {
+        display: block;
+    }
+
+    &.active {
+        transform: translateX(0);
+    }
+
+    .mobile-nav-inner {
+        background-color: var(--overlay-1st-color);
+        height: 100%;
+        padding: 28px 20px 0;
+        position: relative;
+
+        .nav-back {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+
+            transform: translate(0, -50%);
+        }
+
+        .line {
+            width: 100%;
+            margin: 8px 0;
+            height: 1px;
+            background-color: var(--overlay-7th-color);
+        }
+
+        @include media-breakpoint-down(md) {
+            width: 40%;
+        }
+
+        @include media-breakpoint-down(sm) {
+            width: 60%;
+        }
+    }
+
+    .nav-user {
+        margin-top: 12px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .user-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            background-color: var(--overlay-2nd-color);
+        }
+
+        span {
+            font-size: var(--text-h5);
+            font-weight: 500;
+            margin-top: 12px;
+        }
+    }
+
+    .nav-register,
+    .nav-log-out {
+        width: 100%;
+        justify-content: flex-start;
+        margin-left: 0;
+        margin-bottom: 4px;
+    }
+}

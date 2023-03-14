@@ -57,13 +57,23 @@ const MENU = [
     // },
 ];
 
-function Sidebar() {
-    return (
+function Sidebar({ mobile = false }) {
+    return !mobile ? (
         <aside className={cx("wrapper")}>
             <div className={cx("container")}>
                 <div className={cx("menu")}>
                     {MENU.map((item, index) => (
                         <MenuItem key={index} data={item} />
+                    ))}
+                </div>
+            </div>
+        </aside>
+    ) : (
+        <aside>
+            <div className={cx("mobile-container")}>
+                <div className={cx("mobile-menu")}>
+                    {MENU.map((item, index) => (
+                        <MenuItem mobile={true} key={index} data={item} />
                     ))}
                 </div>
             </div>

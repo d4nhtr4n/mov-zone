@@ -15,7 +15,7 @@ import SearchResult from "../SearchResult";
 
 const cx = classNames.bind(style);
 
-function SearchBox() {
+function SearchBox({ connected = false }) {
     const [searchValue, setSearchValue] = useState("");
     const [movieSearchResult, setMovieSearchResults] = useState([]);
     const [tvSearchResults, setTvSearchResult] = useState([]);
@@ -76,7 +76,7 @@ function SearchBox() {
     const renderResult = (attrs) => {
         return (
             <div className={cx("search-result")} tabIndex="-1" {...attrs}>
-                <PoperWrapper>
+                <PoperWrapper className={cx("search-poper")}>
                     <ScrollView>
                         <div className={cx("notify")}>
                             <FontAwesomeIcon
@@ -121,13 +121,17 @@ function SearchBox() {
         <div>
             <Tippy
                 interactive
-                offset={[10, 8]}
+                offset={connected ? [0, -2] : [0, 8]}
                 visible={searchValue && showResult}
                 placement="bottom-end"
                 render={(attrs) => renderResult(attrs)}
                 onClickOutside={handleHideResult}
             >
-                <div className={cx("search")}>
+                <div
+                    className={cx("search", {
+                        connected: connected,
+                    })}
+                >
                     <span className={cx("search-icon")}>
                         <FontAwesomeIcon icon={faMagnifyingGlass} />
                     </span>

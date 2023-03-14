@@ -1,12 +1,23 @@
+@import "bootstrap/scss/mixins/breakpoints";
+@import "src/styles/variables";
+
 .wrapper {
     height: var(--header-height);
     background-color: var(--header-bg-color);
-    padding: 0 var(--app-horizontal-padding);
+    padding: 0 28px;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     z-index: 9;
+
+    @include media-breakpoint-down(md) {
+        padding: 0 20px;
+    }
+
+    @include media-breakpoint-down(sm) {
+        padding: 0 12px;
+    }
 }
 
 .inner {
@@ -14,6 +25,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    position: relative;
 }
 
 .logo {
@@ -25,6 +38,16 @@
 .user-section {
     display: flex;
     align-items: center;
+
+    @include media-breakpoint-down(md) {
+        display: none;
+    }
+}
+
+.user-action {
+    @include media-breakpoint-down(md) {
+        display: none;
+    }
 }
 
 .user-info {
@@ -59,4 +82,62 @@
     border-radius: 50%;
     cursor: pointer;
     margin-right: 2px;
+}
+
+.search-box {
+    @include media-breakpoint-down(md) {
+        display: none;
+    }
+}
+
+.search-btn,
+.nav-btn {
+    display: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: transparent;
+    color: var(--text-1st-color);
+    justify-content: center;
+    align-items: center;
+    @include media-breakpoint-down(md) {
+        display: flex;
+    }
+}
+
+.mobile-search-wrapper {
+    width: 100%;
+    height: var(--header-height);
+    background-color: var(--header-bg-color);
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translateY(-100%);
+    transition: all 0.15s ease-out;
+
+    &.active {
+        transform: translateY(0);
+    }
+
+    .search-back {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--text-3rd-color);
+        right: 0;
+        font-size: 15px;
+        margin-right: 4px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        span {
+            margin-left: 2px;
+            font-size: 10px;
+            line-height: 1;
+        }
+    }
 }
